@@ -11,8 +11,7 @@ $wingetPackages = @{
   "ghisler.totalcommander"         = $null;
   "git.git"                        = $null;
   "IrfanSkiljan.IrfanView"         = $null;
-  "JAMSoftware.TreeSize.Free"      = $null;
-  "Lsd"                            = $null;
+  "JAMSoftware.TreeSize.Free"      = $null;scoo
   "Microsoft.DotNet.SDK.6"         = $null;
   "Microsoft.PowerShell"           = $null;
   "Microsoft.RemoteDesktopClient"  = $null;
@@ -46,13 +45,17 @@ if (!(Get-Command "scoop" -errorAction SilentlyContinue)) {
 
 # Scoop bucket and installation
 $bucketAndPackages = @{
+  "default"    = @("lsd"); 
   "extras"     = @("notepad3");
   "nerd-fonts" = @("Delugia-Nerd-Font-Complete", "Firacode");
   "versions"   = @("lightshot");
 }
 
 $bucketAndPackages.Keys | Sort-Object | ForEach-Object {
-  scoop bucket add $_
+  $bucket = $_
+  if ($bucket -ne "default") {
+    scoop bucket add $bucket
+  }
   $bucketAndPackages[$_].ForEach({
       scoop install $_
     })
