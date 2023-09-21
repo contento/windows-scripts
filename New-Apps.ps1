@@ -17,6 +17,7 @@ $wingetPackages = @{
   "Microsoft.RemoteDesktopClient"  = $null;
   "Microsoft.Teams"                = $null;
   "Microsoft.WindowsTerminal"      = "msstore";
+  "nmap"                           = $null;
   "Notepad++.Notepad++"            = $null;
   "mozilla.firefox"                = $null;
   "Python.Python.3"                = $null;
