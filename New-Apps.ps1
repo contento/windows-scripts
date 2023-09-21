@@ -9,6 +9,7 @@ $wingetPackages = @{
   "Brave.Brave"                    = $null;
   "Ditto.Ditto"                    = $null;
   "ghisler.totalcommander"         = $null;
+  "gokcehan.lf"                    = $null;
   "git.git"                        = $null;
   "IrfanSkiljan.IrfanView"         = $null;
   "JAMSoftware.TreeSize.Free"      = $null;
