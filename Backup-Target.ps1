@@ -55,6 +55,7 @@ $beforeDate = (Get-Date).AddMonths( -$ArchiveThreshHold)
 
 if ($Uncompressed ) {
   $Destination = "$($DestinationBasePath)$($Extension)"
+  $ArchiveExclusions += $Destination
 
   "Copying '$($Path)' to '$($Destination)' ..."
   Copy-Item -Path $Path -Destination $Destination -Force
@@ -68,6 +69,7 @@ if ($Uncompressed ) {
 }
 else {
   $DestinationZip = "$($DestinationBasePath).zip"
+  $ArchiveExclusions += $DestinationZip
 
   "Compressing '$($Path)' to '$($DestinationZip)' ..."
   Compress-Archive -Path $Path -DestinationPath $DestinationZip -Force
