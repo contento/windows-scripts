@@ -1,7 +1,63 @@
-# Set execution policy
-Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
+<#
+.SYNOPSIS
+  Script to install various applications using winget and Scoop.
 
-# Install necessary software using winget
+.DESCRIPTION
+  This script sets the execution policy for the current user to unrestricted,
+  installs a predefined list of applications using winget, checks for Scoop installation,
+  and installs Scoop along with a predefined list of applications and fonts.
+
+.NOTES
+  FileName: New-Apps.ps1
+  Author: Gonzalo Contento
+  Version: 2.0
+  Date: 2024-05-14
+#>
+
+function Set-ExecutionPolicyForCurrentUser {
+  Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
+}
+
+function Install-WingetPackages {
+  param (
+    [Parameter(Mandatory = $true)]
+    [hashtable]$Packages
+  )
+
+  $Packages.Keys | Sort-Object | ForEach-Object {
+    if ($null -ne $Packages[$_]) {
+      winget install $_ --source $Packages[$_] --silent
+    }
+    else {
+      winget install $_ --silent
+    }
+  }
+}
+
+function Install-ScoopAndPackages {
+  param (
+    [Parameter(Mandatory = $true)]
+    [hashtable]$BucketAndPackages
+  )
+
+  if (-not (Get-Command "scoop" -ErrorAction SilentlyContinue)) {
+    iex "& {$(Invoke-RestMethod get.scoop.sh)} -RunAsAdmin"
+  }
+
+  $BucketAndPackages.Keys | Sort-Object | ForEach-Object {
+    $bucket = $_
+    if ($bucket -ne "default") {
+      scoop bucket add $bucket
+    }
+    $BucketAndPackages[$_].ForEach({
+      scoop install $_
+    })
+  }
+}
+
+# Main script execution
+Set-ExecutionPolicyForCurrentUser
+
 $wingetPackages = @{
   "7zip.7zip"                      = $null;
   "ScooterSoftware.BeyondCompare4" = $null;
@@ -25,43 +81,16 @@ $wingetPackages = @{
   "RealVNC.VNCViewer"              = $null;
   "SysInternals"                   = $null;
   "Microsoft.VisualStudioCode"     = $null;
-  "VivaldiTechnologies.Vivaldi"    = $null
+  "VivaldiTechnologies.Vivaldi"    = $null;
 }
 
-$wingetPackages.Keys | Sort-Object | ForEach-Object {
-  if ($null -ne $wingetPackages[$_]) {
-    winget install $_ --source $wingetPackages[$_] --silent
-  }
-  else {
-    winget install $_ --silent
-  }
-}
+Install-WingetPackages -Packages $wingetPackages
 
-# Scoop Installation and Packages
-if (!(Get-Command "scoop" -errorAction SilentlyContinue)) {
-  # As a normal user
-  # Invoke-RestMethod get.scoop.sh | iex
-  # as an Admin
-  iex "& {$(Invoke-RestMethod get.scoop.sh)} -RunAsAdmin"
-}
-
-# Scoop bucket and installation
 $bucketAndPackages = @{
-  "default"    = @("lsd"); 
+  "default"    = @("lsd", "starship", "fzf"); 
   "extras"     = @("notepad3");
   "nerd-fonts" = @("Delugia-Nerd-Font-Complete", "Firacode");
   "versions"   = @("lightshot");
 }
 
-$bucketAndPackages.Keys | Sort-Object | ForEach-Object {
-  $bucket = $_
-  if ($bucket -ne "default") {
-    scoop bucket add $bucket
-  }
-  $bucketAndPackages[$_].ForEach({
-      scoop install $_
-    })
-}
-
-# Install starship
-scoop install starship
+Install-ScoopAndPackages -BucketAndPackages $bucketAndPackages
