@@ -69,7 +69,6 @@ $wingetPackages = @{
   "git.git"                        = $null;
   "IrfanSkiljan.IrfanView"         = $null;
   "JAMSoftware.TreeSize.Free"      = $null;
-  "Microsoft.DotNet.SDK.6"         = $null;
   "Microsoft.PowerShell"           = $null;
   "Microsoft.RemoteDesktopClient"  = $null;
   "Microsoft.Teams"                = $null;
@@ -78,10 +77,8 @@ $wingetPackages = @{
   "Notepad++.Notepad++"            = $null;
   "mozilla.firefox"                = $null;
   "Python.Python.3"                = $null;
-  "RealVNC.VNCViewer"              = $null;
   "SysInternals"                   = $null;
   "Microsoft.VisualStudioCode"     = $null;
-  "VivaldiTechnologies.Vivaldi"    = $null;
 }
 
 Install-WingetPackages -Packages $wingetPackages
