@@ -86,7 +86,7 @@ Install-WingetPackages -Packages $wingetPackages
 $bucketAndPackages = @{
   "default"    = @("lsd", "starship", "fzf"); 
   "extras"     = @("notepad3");
-  "nerd-fonts" = @("Delugia-Nerd-Font-Complete", "Firacode");
+  "nerd-fonts" = @("Delugia-Nerd-Font-Complete", "Firacode", "Firacode-NF");
   "versions"   = @("lightshot");
 }
 
