@@ -24,6 +24,9 @@ $LinkInfo.GetEnumerator() | ForEach-Object {
   New-Item -ItemType SymbolicLink -Path $path -Target $target -ErrorAction Continue
 }
 
+# Map drive A: to \\tesoro\assets
+subst A: "\\tesoro\assets"
+
 ##############################################################
 # Windows Apps - Links
 
@@ -43,15 +46,3 @@ $pythonVersion = "Python$pythonMajorVersion$pythonMinorVersion"
 # $PYTHON_SCRIPTS_PATH = "$env:LOCALAPPDATA\Packages\$packageName\LocalCache\local-packages\$pythonVersion\Scripts"
 # or if you're using Programs
 $PYTHON_SCRIPTS_PATH = "$Env:LOCALAPPDATA/Programs/Python/$pythonVersion/Scripts "
-
-$LinkInfo = @{
-  "$($WINDOWS_APPS)/jupyter.exe"         	= "$PYTHON_SCRIPTS_PATH/jupyter.exe";
-  "$($WINDOWS_APPS)/git-filter-repo.exe" 	= "$PYTHON_SCRIPTS_PATH/git-filter-repo.exe";
-  "$($WINDOWS_APPS)/vim.exe" 				      = "$Env:ProgramFiles/vim/vim90/vim.exe";
-}
-
-$LinkInfo.GetEnumerator() | ForEach-Object {
-  $path = $_.Key
-  $target = $_.Value
-  New-Item -ItemType SymbolicLink -Path $path -Target $target -Force -ErrorAction Continue
-}
