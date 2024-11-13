@@ -2,19 +2,18 @@
 
 # To Folders
 $LinkInfo = @{
-  "C:/Projects"         = "$Home/Projects";
-  "C:/Logs"             = "$Home/Logs";
-  "C:/Temp"             = "$Home/Temp";
-  "C:/Virtual Machines" = "$Home/Virtual Machines";
-  # OneDrive Consumer
-  "C:/Backup"           = "$Env:OneDriveConsumer/Backup";
-  "C:/Music"            = "$Env:OneDriveConsumer/Music";
-  "C:/Pictures"         = "$Env:OneDriveConsumer/Pictures";
-  "C:/Photos"           = "$Env:OneDriveConsumer/Photos";
-  "C:/Staging"          = "$Env:OneDriveConsumer/Staging";
-  "C:/Videos"           = "$Env:OneDriveConsumer/Videos";
-  # Ghisler - Total Commander
-  "C:/Tools"            = "$Env:APPDATA/Ghisler/Tools";
+  "C:/Projects"            = "$Home/Projects";
+  "C:/Logs"                = "$Home/Logs";
+  "C:/Temp"                = "$Home/Temp";
+  "C:/Virtual Machines"    = "$Home/Virtual Machines";
+  "C:/Backup"              = "$Env:OneDriveConsumer/Backup";
+  "C:/Music"               = "$Env:OneDriveConsumer/Music";
+  "C:/Pictures"            = "$Env:OneDriveConsumer/Pictures";
+  "C:/Photos"              = "$Env:OneDriveConsumer/Photos";
+  "C:/Staging"             = "$Env:OneDriveConsumer/Staging";
+  "C:/Videos"              = "$Env:OneDriveConsumer/Videos";
+  "C:/Tools"               = "$Env:APPDATA/Ghisler/Tools";
+  "$Env:LOCALAPPDATA/nvim" = "$HOME/Projects/contento/dotfiles/nvim/.config/nvim";
 }
 
 $LinkInfo.GetEnumerator() | ForEach-Object {

@@ -69,6 +69,7 @@ $wingetPackages = @{
   "git.git"                        = $null;
   "IrfanSkiljan.IrfanView"         = $null;
   "JAMSoftware.TreeSize.Free"      = $null;
+  "lazygit"                        = $null;
   "Microsoft.PowerShell"           = $null;
   "Microsoft.RemoteDesktopClient"  = $null;
   "Microsoft.Teams"                = $null;
