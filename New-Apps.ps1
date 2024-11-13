@@ -76,6 +76,8 @@ $wingetPackages = @{
   "nmap"                           = $null;
   "Notepad++.Notepad++"            = $null;
   "mozilla.firefox"                = $null;
+  "portal"                         = $null; 
+  "zoxide"                         = $null;
   "Python.Python.3"                = $null;
   "SysInternals"                   = $null;
   "Microsoft.VisualStudioCode"     = $null;
@@ -84,7 +86,7 @@ $wingetPackages = @{
 Install-WingetPackages -Packages $wingetPackages
 
 $bucketAndPackages = @{
-  "default"    = @("lsd", "starship", "fzf"); 
+  "default"    = @("starship", "fzf"); 
   "extras"     = @("notepad3");
   "nerd-fonts" = @("Delugia-Nerd-Font-Complete", "Firacode", "Firacode-NF");
   "versions"   = @("lightshot");
