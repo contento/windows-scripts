@@ -23,15 +23,17 @@ New-Alias -Name y     -Value  "yazi"
 
 # ls
 Function LsE { 
-	param ( [Parameter(Mandatory=$false, Position=0)] $Args ) 
-	eza --color=always --git --icons=always $Args 
+    param ( 
+        [Parameter(Mandatory=$false, Position=0, ValueFromRemainingArguments=$true)] 
+        $Args 
+    ) 
+    eza --color=always --git --icons=always @Args 
 }
 
-Function LsL 	{ LsE -Args -l  };    	Set-Alias -Name l  	-Value LsL 	-Description "ls -l";
-Function LsA 	{ LsE -Args -la };    	Set-Alias -Name la 	-Value LsA 	-Description "ls -la";
-Function LsLA 	{ LsE -Args -lla };    	Set-Alias -Name lla -Value LsLA -Description "ls -la";
-Function LsT 	{ LsE -Args --tree }; 	Set-Alias -Name lt 	-Value LsT 	-Description "ls --tree";
-
+Function LsL  { param($LsArgs) LsE @LsArgs -l  };    Set-Alias -Name l   -Value LsL  -Description "ls -l";
+Function LsA  { param($LsArgs) LsE @LsArgs -la };    Set-Alias -Name la  -Value LsA  -Description "ls -la";
+Function LsLA { param($LsArgs) LsE @LsArgs -lla };   Set-Alias -Name lla -Value LsLA -Description "ls -la";
+Function LsT  { param($LsArgs) LsE @LsArgs --tree }; Set-Alias -Name lt  -Value LsT  -Description "ls --tree";
 # cd
 Set-Alias -Name cd -Value z -Description "z" -Option AllScope
 Set-Alias -Name cdi -Value zi -Description "zi" -Option AllScope
