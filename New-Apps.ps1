@@ -50,8 +50,8 @@ function Install-ScoopAndPackages {
       scoop bucket add $bucket
     }
     $BucketAndPackages[$_].ForEach({
-      scoop install $_
-    })
+        scoop install $_
+      })
   }
 }
 
@@ -59,35 +59,36 @@ function Install-ScoopAndPackages {
 Set-ExecutionPolicyForCurrentUser
 
 $wingetPackages = @{
-  "7zip.7zip"                      = $null;
-  "ScooterSoftware.BeyondCompare4" = $null;
-  "Bitwarden.Bitwarden"            = $null;
-  "Brave.Brave"                    = $null;
-  "Ditto.Ditto"                    = $null;
-  "ghisler.totalcommander"         = $null;
-  "gokcehan.lf"                    = $null;
-  "git.git"                        = $null;
-  "IrfanSkiljan.IrfanView"         = $null;
-  "JAMSoftware.TreeSize.Free"      = $null;
-  "lazygit"                        = $null;
-  "Microsoft.PowerShell"           = $null;
-  "Microsoft.RemoteDesktopClient"  = $null;
-  "Microsoft.Teams"                = $null;
-  "Microsoft.WindowsTerminal"      = "msstore";
-  "nmap"                           = $null;
-  "Notepad++.Notepad++"            = $null;
-  "mozilla.firefox"                = $null;
-  "portal"                         = $null; 
-  "zoxide"                         = $null;
-  "Python.Python.3"                = $null;
-  "SysInternals"                   = $null;
-  "Microsoft.VisualStudioCode"     = $null;
+  "7zip.7zip"                       = $null;
+  "ScooterSoftware.BeyondCompare.5" = $null;
+  "Bitwarden.Bitwarden"             = $null;
+  "Brave.Brave"                     = $null;
+  "Ditto.Ditto"                     = $null;
+  "ghisler.totalcommander"          = $null;
+  "gokcehan.lf"                     = $null;
+  "git.git"                         = $null;
+  "IrfanSkiljan.IrfanView"          = $null;
+  "JAMSoftware.TreeSize.Free"       = $null;
+  "lazygit"                         = $null;
+  "Microsoft.PowerShell"            = $null;
+  "Microsoft.RemoteDesktopClient"   = $null;
+  "Microsoft.Teams"                 = $null;
+  "Microsoft.WindowsTerminal"       = "msstore";
+  "Neovim"                          = $null;
+  "nmap"                            = $null;
+  "Notepad++.Notepad++"             = $null;
+  "mozilla.firefox"                 = $null;
+  "portal"                          = $null; 
+  "zoxide"                          = $null;
+  "Python.Python.3"                 = $null;
+  "SysInternals"                    = $null;
+  "Microsoft.VisualStudioCode"      = $null;
 }
 
 Install-WingetPackages -Packages $wingetPackages
 
 $bucketAndPackages = @{
-  "default"    = @("starship", "fzf"); 
+  "default"    = @("eza", "fzf", "starship", "yazi"); 
   "extras"     = @("notepad3");
   "nerd-fonts" = @("Delugia-Nerd-Font-Complete", "Firacode", "Firacode-NF");
   "versions"   = @("lightshot");

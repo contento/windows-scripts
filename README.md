@@ -13,7 +13,7 @@ Also,
 - Make sure SSH Open Server Agent is enabled.
 - If you get errors because of your ssh client, see below.
 
-if you get:
+### Open SSH and Git
 
 ```sh
 Cloning into '{{repository}}'...

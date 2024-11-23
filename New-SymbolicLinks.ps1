@@ -2,19 +2,23 @@
 
 # To Folders
 $LinkInfo = @{
-  "C:/Projects"              = "$Home/Projects";
-  "C:/Logs"                  = "$Home/Logs";
-  "C:/Temp"                  = "$Home/Temp";
-  "C:/Virtual Machines"      = "$Home/Virtual Machines";
   "C:/Backup"                = "$Env:OneDriveConsumer/Backup";
+  "C:/Logs"                  = "$Home/Logs";
   "C:/Music"                 = "$Env:OneDriveConsumer/Music";
-  "C:/Pictures"              = "$Env:OneDriveConsumer/Pictures";
   "C:/Photos"                = "$Env:OneDriveConsumer/Photos";
+  "C:/Pictures"              = "$Env:OneDriveConsumer/Pictures";
+  "C:/Projects"              = "$Home/Projects";
   "C:/Staging"               = "$Env:OneDriveConsumer/Staging";
   "C:/Videos"                = "$Env:OneDriveConsumer/Videos";
+  "C:/Virtual Machines"      = "$Home/Virtual Machines";
+  "C:/Temp"                  = "$Home/Temp";
   "C:/Tools"                 = "$Env:APPDATA/Ghisler/Tools";
+  #
   "$Env:LOCALAPPDATA/nvim"   = "$HOME/Projects/contento/dotfiles/nvim/.config/nvim";
+  #
+  "$Home/Downloads/Assets"   = "\\tesoro\Assets";
   "$Home/Downloads/Material" = "$Env:OneDriveConsumer/Pictures/Material";
+  "$Home/Downloads/Temp"     = "$Home/Temp";
 }
 
 $LinkInfo.GetEnumerator() | ForEach-Object {
@@ -25,6 +29,3 @@ $LinkInfo.GetEnumerator() | ForEach-Object {
   Write-Output "     [$target - link] Creating from $path to $target"
   New-Item -ItemType SymbolicLink -Path $path -Target $target -ErrorAction Continue
 }
-# Map drive A: to \\tesoro\assets
-Write-Output "**** [A: - link] Creating from A: to \\tesoro\assets"
-subst A: "\\tesoro\assets"
