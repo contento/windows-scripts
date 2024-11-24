@@ -22,18 +22,49 @@ New-Alias -Name v     -Value  "nvim"
 New-Alias -Name y     -Value  "yazi"
 
 # ls
-Function LsE { 
-    param ( 
-        [Parameter(Mandatory=$false, Position=0, ValueFromRemainingArguments=$true)] 
-        $Args 
-    ) 
-    eza --color=always --git --icons=always @Args 
+# ===============================================
+# PowerShell Custom Directory Listing Functions
+# ===============================================
+# This script defines custom functions for directory listing
+# using the 'eza' command. It first removes any existing
+# aliases that might conflict with the function names.
+# ===============================================
+
+# Function to remove existing aliases if they exist
+Function Remove-ExistingAlias {
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$AliasName
+    )
+
+    # Check if the alias exists
+    if (Get-Alias -Name $AliasName -ErrorAction SilentlyContinue) {
+        try {
+            # Remove the alias
+            Remove-Item -Path "Alias:$AliasName" -Force
+            Write-Verbose "Removed existing alias: $AliasName"
+        }
+        catch {
+            Write-Warning "Failed to remove alias '$AliasName'. Error: $_"
+        }
+    }
 }
 
-Function LsL  { param($LsArgs) LsE @LsArgs -l  };    Set-Alias -Name l   -Value LsL  -Description "ls -l";
-Function LsA  { param($LsArgs) LsE @LsArgs -la };    Set-Alias -Name la  -Value LsA  -Description "ls -la";
-Function LsLA { param($LsArgs) LsE @LsArgs -lla };   Set-Alias -Name lla -Value LsLA -Description "ls -la";
-Function LsT  { param($LsArgs) LsE @LsArgs --tree }; Set-Alias -Name lt  -Value LsT  -Description "ls --tree";
+# ===============================================
+# Remove Aliases if They Exist
+# ===============================================
+Remove-ExistingAlias -AliasName 'l'
+Remove-ExistingAlias -AliasName 'la'
+Remove-ExistingAlias -AliasName 'lla'
+Remove-ExistingAlias -AliasName 'lt'
+
+function lse 	{ eza --color=always --git --icons=always @args }
+
+function ll 	{ lse --long @args }
+function la 	{ lse --all @args }
+function lla 	{ lse --long --all @args }
+function lt 	{ lse --tree @args }
+
 # cd
 Set-Alias -Name cd -Value z -Description "z" -Option AllScope
 Set-Alias -Name cdi -Value zi -Description "zi" -Option AllScope
