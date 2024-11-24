@@ -19,6 +19,7 @@ $LinkInfo = @{
   "$Home/Downloads/Assets"   = "\\tesoro\Assets";
   "$Home/Downloads/Material" = "$Env:OneDriveConsumer/Pictures/Material";
   "$Home/Downloads/Temp"     = "$Home/Temp";
+  "$Home/Downloads/WIP"      = "$Env:OneDriveConsumer/WIP";
 }
 
 $LinkInfo.GetEnumerator() | ForEach-Object {
