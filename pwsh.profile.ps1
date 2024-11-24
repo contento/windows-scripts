@@ -58,12 +58,11 @@ Remove-ExistingAlias -AliasName 'la'
 Remove-ExistingAlias -AliasName 'lla'
 Remove-ExistingAlias -AliasName 'lt'
 
-function lse 	{ eza --color=always --git --icons=always @args }
-
-function ll 	{ lse --long @args }
-function la 	{ lse --all @args }
-function lla 	{ lse --long --all @args }
-function lt 	{ lse --tree @args }
+function l 		{ eza --color=always --git --icons=always @args }
+function ll 	{ l --long @args }
+function la 	{ l --all @args }
+function lla 	{ l --long --all @args }
+function lt 	{ l --tree @args }
 
 # cd
 Set-Alias -Name cd -Value z -Description "z" -Option AllScope

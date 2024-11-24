@@ -47,3 +47,11 @@ For example, to backup your PowerShell profile:
 ```
 
 > Depends on `Backup-Target.ps1`
+
+## PowerShell $PROFILE
+
+You may want to keep this copy up to date
+
+```sh
+cp $PROFILE pwsh.profile.ps1
+```
