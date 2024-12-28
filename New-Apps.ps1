@@ -24,13 +24,14 @@ function Install-WingetPackages {
     [hashtable]$Packages
   )
 
-  $Packages.Keys | Sort-Object | ForEach-Object {
-    if ($null -ne $Packages[$_]) {
-      winget install $_ --source $Packages[$_] --silent
-    }
-    else {
-      winget install $_ --silent
-    }
+  "[****] Installing winget packages..."
+
+  $Packages.nullStore | Sort-Object | ForEach-Object {
+    winget install $_ --silent
+  }
+
+  $Packages.msstore | Sort-Object | ForEach-Object {
+    winget install $_ --source msstore --silent
   }
 }
 
@@ -39,6 +40,8 @@ function Install-ScoopAndPackages {
     [Parameter(Mandatory = $true)]
     [hashtable]$BucketAndPackages
   )
+
+  "[****] Installing Scoop and packages..."
 
   if (-not (Get-Command "scoop" -ErrorAction SilentlyContinue)) {
     iex "& {$(Invoke-RestMethod get.scoop.sh)} -RunAsAdmin"
@@ -59,30 +62,34 @@ function Install-ScoopAndPackages {
 Set-ExecutionPolicyForCurrentUser
 
 $wingetPackages = @{
-  "7zip.7zip"                       = $null;
-  "ScooterSoftware.BeyondCompare.5" = $null;
-  "Bitwarden.Bitwarden"             = $null;
-  "Brave.Brave"                     = $null;
-  "Ditto.Ditto"                     = $null;
-  "ghisler.totalcommander"          = $null;
-  "gokcehan.lf"                     = $null;
-  "git.git"                         = $null;
-  "IrfanSkiljan.IrfanView"          = $null;
-  "JAMSoftware.TreeSize.Free"       = $null;
-  "lazygit"                         = $null;
-  "Microsoft.PowerShell"            = $null;
-  "Microsoft.RemoteDesktopClient"   = $null;
-  "Microsoft.Teams"                 = $null;
-  "Microsoft.WindowsTerminal"       = "msstore";
-  "Neovim"                          = $null;
-  "nmap"                            = $null;
-  "Notepad++.Notepad++"             = $null;
-  "mozilla.firefox"                 = $null;
-  "portal"                          = $null; 
-  "zoxide"                          = $null;
-  "Python.Python.3"                 = $null;
-  "SysInternals"                    = $null;
-  "Microsoft.VisualStudioCode"      = $null;
+  "nullStore" = @(
+    "7zip.7zip",
+    "Bitwarden.Bitwarden",
+    "Brave.Brave",
+    "Ditto.Ditto",
+    "ghisler.totalcommander",
+    "git.git",
+    "gokcehan.lf",
+    "IrfanSkiljan.IrfanView",
+    "JAMSoftware.TreeSize.Free",
+    "lazygit",
+    "Microsoft.PowerShell",
+    "Microsoft.RemoteDesktopClient",
+    "Microsoft.Teams",
+    "mozilla.firefox",
+    "Neovim",
+    "nmap",
+    "Notepad++.Notepad++",
+    "portal",
+    "Python.Python.3",
+    "ScooterSoftware.BeyondCompare.5",
+    "SysInternals",
+    "zoxide",
+    "Microsoft.VisualStudioCode"
+  );
+  "msstore" = @(
+    "Microsoft.WindowsTerminal"
+  )
 }
 
 Install-WingetPackages -Packages $wingetPackages
