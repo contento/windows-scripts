@@ -76,16 +76,17 @@ $wingetPackages = @{
     "Microsoft.PowerShell",
     "Microsoft.RemoteDesktopClient",
     "Microsoft.Teams",
+    "Microsoft.VisualStudioCode"
     "mozilla.firefox",
     "Neovim",
     "nmap",
     "Notepad++.Notepad++",
     "portal",
     "Python.Python.3",
+    "Rustlang.Rustup",
     "ScooterSoftware.BeyondCompare.5",
     "SysInternals",
-    "zoxide",
-    "Microsoft.VisualStudioCode"
+    "zoxide"
   );
   "msstore" = @(
     "Microsoft.WindowsTerminal"
