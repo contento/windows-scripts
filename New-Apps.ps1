@@ -34,6 +34,7 @@ $wingetPackages = @{
     "Neovim",
     "nmap",
     "Notepad++.Notepad++",
+    "starship", 
     "SpatiumPortae.portal",
     "Python.Python.3",
     "Rustlang.Rustup",
@@ -51,7 +52,6 @@ $scoopPackages = @{
     "btop",  
     "eza", 
     "fzf", 
-    "starship", 
     "yazi"); 
   "extras"     = @("notepad3");
   "nerd-fonts" = @("Delugia-Nerd-Font-Complete", "Firacode", "Firacode-NF");
