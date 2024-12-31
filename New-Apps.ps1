@@ -14,6 +14,54 @@
   Date: 2024-05-14
 #>
 
+$wingetPackages = @{
+  "nullStore" = @(
+    "7zip.7zip",
+    "Bitwarden.Bitwarden",
+    "Brave.Brave",
+    "Ditto.Ditto",
+    "ghisler.totalcommander",
+    "git.git",
+    "gokcehan.lf",
+    "IrfanSkiljan.IrfanView",
+    "JAMSoftware.TreeSize.Free",
+    "lazygit",
+    "Microsoft.PowerShell",
+    "Microsoft.RemoteDesktopClient",
+    "Microsoft.Teams",
+    "Microsoft.VisualStudioCode"
+    "mozilla.firefox",
+    "Neovim",
+    "nmap",
+    "Notepad++.Notepad++",
+    "SpatiumPortae.portal",
+    "Python.Python.3",
+    "Rustlang.Rustup",
+    "ScooterSoftware.BeyondCompare.5",
+    "SysInternals",
+    "zoxide"
+  );
+  "msstore" = @(
+    "Microsoft.WindowsTerminal"
+  )
+}
+
+$scoopPackages = @{
+  "default"    = @(
+    "btop",  
+    "eza", 
+    "fzf", 
+    "starship", 
+    "yazi"); 
+  "extras"     = @("notepad3");
+  "nerd-fonts" = @("Delugia-Nerd-Font-Complete", "Firacode", "Firacode-NF");
+  "versions"   = @("lightshot");
+}
+
+$cargoPackages = @(
+    "pfetch"
+)
+
 function Set-ExecutionPolicyForCurrentUser {
   Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
 }
@@ -35,76 +83,46 @@ function Install-WingetPackages {
   }
 }
 
-function Install-ScoopAndPackages {
+function Install-ScoopPackages {
   param (
     [Parameter(Mandatory = $true)]
-    [hashtable]$BucketAndPackages
+    [hashtable]$Packages
   )
 
-  "[****] Installing Scoop and packages..."
+  "[****] Installing Scoop packages..."
 
   if (-not (Get-Command "scoop" -ErrorAction SilentlyContinue)) {
-    iex "& {$(Invoke-RestMethod get.scoop.sh)} -RunAsAdmin"
+    Invoke-Expression "& {$(Invoke-RestMethod get.scoop.sh)} -RunAsAdmin"
   }
 
-  $BucketAndPackages.Keys | Sort-Object | ForEach-Object {
+  $Packages.Keys | Sort-Object | ForEach-Object {
     $bucket = $_
     if ($bucket -ne "default") {
       scoop bucket add $bucket
     }
-    $BucketAndPackages[$_].ForEach({
+    $Packages[$_].ForEach({
         scoop install $_
       })
   }
 }
 
+function Install-CargoPackages {
+    param (
+        [string[]]$Packages
+    )
+
+    foreach ($package in $Packages) {
+        Write-Host "Installing Cargo package: $package"
+        cargo install $package
+    }
+}
+
+####################################################################################################
 # Main script execution
 Set-ExecutionPolicyForCurrentUser
 
-$wingetPackages = @{
-  "nullStore" = @(
-    "7zip.7zip",
-    "Bitwarden.Bitwarden",
-    "Brave.Brave",
-    "Ditto.Ditto",
-    "ghisler.totalcommander",
-    "git.git",
-    "gokcehan.lf",
-    "IrfanSkiljan.IrfanView",
-    "JAMSoftware.TreeSize.Free",
-    "lazygit",
-    "Microsoft.PowerShell",
-    "Microsoft.RemoteDesktopClient",
-    "Microsoft.Teams",
-    "Microsoft.VisualStudioCode"
-    "mozilla.firefox",
-    "Neovim",
-    "nmap",
-    "Notepad++.Notepad++",
-    "portal",
-    "Python.Python.3",
-    "Rustlang.Rustup",
-    "ScooterSoftware.BeyondCompare.5",
-    "SysInternals",
-    "zoxide"
-  );
-  "msstore" = @(
-    "Microsoft.WindowsTerminal"
-  )
-}
-
 Install-WingetPackages -Packages $wingetPackages
 
-$bucketAndPackages = @{
-  "default"    = @(
-    "btop",  
-    "eza", 
-    "fzf", 
-    "starship", 
-    "yazi"); 
-  "extras"     = @("notepad3");
-  "nerd-fonts" = @("Delugia-Nerd-Font-Complete", "Firacode", "Firacode-NF");
-  "versions"   = @("lightshot");
-}
+Install-ScoopPackages -Packages $scoopPackages
 
-Install-ScoopAndPackages -BucketAndPackages $bucketAndPackages
+Install-CargoPackages -Packages $cargoPackages
