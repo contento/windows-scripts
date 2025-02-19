@@ -40,6 +40,7 @@ $wingetPackages = @{
     "Rustlang.Rustup",
     "ScooterSoftware.BeyondCompare.5",
     "SysInternals",
+    "Zen-Team.Zen-Browser",
     "zoxide"
   );
   "msstore" = @(
