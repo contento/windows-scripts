@@ -22,16 +22,14 @@ $wingetPackages = @{
     "Ditto.Ditto",
     "ghisler.totalcommander",
     "git.git",
-    "gokcehan.lf",
     "IrfanSkiljan.IrfanView",
     "JAMSoftware.TreeSize.Free",
     "lazygit",
     "Microsoft.PowerShell",
-    "Microsoft.RemoteDesktopClient",
+    "Microsoft.SysInternals",
     "Microsoft.Teams",
     "Microsoft.VisualStudioCode"
     "mozilla.firefox",
-    "Neovim",
     "nmap",
     "Notepad++.Notepad++",
     "starship", 
@@ -39,7 +37,6 @@ $wingetPackages = @{
     "Python.Python.3",
     "Rustlang.Rustup",
     "ScooterSoftware.BeyondCompare.5",
-    "SysInternals",
     "Zen-Team.Zen-Browser",
     "zoxide"
   );
