@@ -31,10 +31,10 @@ $wingetPackages = @{
     "Microsoft.VisualStudioCode"
     "mozilla.firefox",
     "nmap",
-    "Notepad++.Notepad++",
     "starship", 
     "SpatiumPortae.portal",
     "Python.Python.3",
+    "RevoUninstaller.RevoUninstaller",
     "Rustlang.Rustup",
     "ScooterSoftware.BeyondCompare.5",
     "Zen-Team.Zen-Browser",
