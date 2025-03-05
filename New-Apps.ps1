@@ -53,6 +53,7 @@ $scoopPackages = @{
     "btop",  
     "eza", 
     "fzf", 
+    "ghostscript",
     "yazi"); 
   "extras"     = @("notepad3");
   "nerd-fonts" = @("Delugia-Nerd-Font-Complete", "Firacode", "Firacode-NF");
