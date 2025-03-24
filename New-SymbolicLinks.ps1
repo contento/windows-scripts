@@ -10,11 +10,11 @@ $LinkInfo = @{
   "C:/Projects"              = "$Home/Projects";
   "C:/Staging"               = "$Env:OneDriveConsumer/Staging";
   "C:/Videos"                = "$Env:OneDriveConsumer/Videos";
-  "C:/Virtual Machines"      = "$Home/Virtual Machines";
+  # "C:/Virtual Machines"      = "$Home/Virtual Machines";
   "C:/Temp"                  = "$Home/Temp";
   "C:/Tools"                 = "$Env:APPDATA/Ghisler/Tools";
   #
-  "$Env:LOCALAPPDATA/nvim"   = "$HOME/Projects/contento/dotfiles/nvim/.config/nvim";
+  # "$Env:LOCALAPPDATA/nvim"   = "$HOME/Projects/contento/dotfiles/nvim/.config/nvim";
   #
   "$Home/Downloads/Assets"   = "\\tesoro\Assets";
   "$Home/Downloads/Material" = "$Env:OneDriveConsumer/Pictures/Material";

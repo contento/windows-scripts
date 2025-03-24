@@ -10,8 +10,6 @@
 .NOTES
   FileName: New-Apps.ps1
   Author: Gonzalo Contento
-  Version: 2.0
-  Date: 2024-05-14
 #>
 
 $wingetPackages = @{
