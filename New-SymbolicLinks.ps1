@@ -8,8 +8,13 @@ if (-not (Test-Path -Path "P:\")) {
     Write-Output "Creating directory $projectsPath..."
     New-Item -ItemType Directory -Path $projectsPath -ErrorAction Stop
   }
-  New-PSDrive -Name "P" -PSProvider "FileSystem" -Root $projectsPath -Persist
+  subst P: $projectsPath 
   Write-Output "Drive P: created and mapped to $projectsPath."
+
+    # Make the mapping persistent
+  Write-Output "Making the P: drive mapping persistent..."
+  reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "MapPDrive" /t REG_SZ /d "subst P: $projectsPath" /f
+  Write-Output "P: drive mapping made persistent." 
 }
 
 # To Folders
