@@ -53,5 +53,5 @@ For example, to backup your PowerShell profile:
 You may want to keep this copy up to date
 
 ```sh
-cp $PROFILE pwsh.profile.ps1
+cp $PROFILE Pwsh-Profile.ps1
 ```
