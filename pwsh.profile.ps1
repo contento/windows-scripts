@@ -39,5 +39,5 @@ function lla { l --long --all @args }
 function lt  { l --tree @args }
 
 # cd
-Set-Alias -Name cd -Value z -Description "z" -Option AllScope
-Set-Alias -Name cdi -Value zi -Description "zi" -Option AllScope
+Set-Alias -Name cd  -Value z  -Description "z"  -Option AllScope -Force
+Set-Alias -Name cdi -Value zi -Description "zi" -Option AllScope -Force
