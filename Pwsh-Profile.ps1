@@ -8,6 +8,10 @@ Why this script exists
 In short, this file is a portable profile backup I can dot-source when `$PROFILE` is not usable.
 #>
 
+# ---- Fastfetch
+# scoop install fastfetch
+fastfetch --logo none --structure "OS:Shell:CPU:Memory:Uptime"
+
 # ---- Starship
 # https://github.com/starship/starship
 # scoop install starship 
