@@ -33,7 +33,6 @@ $wingetPackages = @{
     "SpatiumPortae.portal",
     "Python.Python.3",
     "RevoUninstaller.RevoUninstaller",
-    "Rustlang.Rustup",
     "ScooterSoftware.BeyondCompare.5",
     "Microsoft.WindowsTerminal",
     "Zen-Team.Zen-Browser",
@@ -43,19 +42,16 @@ $wingetPackages = @{
 
 $scoopPackages = @{
   "default"    = @(
-    "btop",  
-    "eza", 
-    "fzf", 
+    "btop",
+    "eza",
+    "fastfetch",
+    "fzf",
     "ghostscript",
-    "yazi"); 
+    "yazi");
   "extras"     = @("notepad3");
   "nerd-fonts" = @("Delugia-Nerd-Font-Complete", "Firacode", "Firacode-NF");
   "versions"   = @("lightshot");
 }
-
-$cargoPackages = @(
-  "pfetch"
-)
 
 function Set-ExecutionPolicyForCurrentUser {
   Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser
@@ -91,7 +87,7 @@ function Install-ScoopPackages {
     Invoke-Expression "& {$(Invoke-RestMethod get.scoop.sh)} -RunAsAdmin"
     # Refresh PATH so scoop is available in the current session
     $env:PATH = [System.Environment]::GetEnvironmentVariable("PATH", "Machine") + ";" +
-                [System.Environment]::GetEnvironmentVariable("PATH", "User")
+    [System.Environment]::GetEnvironmentVariable("PATH", "User")
   }
 
   $Packages.Keys | Sort-Object | ForEach-Object {
@@ -105,22 +101,6 @@ function Install-ScoopPackages {
   }
 }
 
-function Install-CargoPackages {
-  param (
-    [string[]]$Packages
-  )
-
-  if (-not (Get-Command "cargo" -ErrorAction SilentlyContinue)) {
-    Write-Warning "cargo not found. Ensure rustup is installed and restart your shell first."
-    return
-  }
-
-  Write-Host "[****] Installing Cargo packages..."
-  foreach ($package in $Packages) {
-    cargo install $package
-  }
-}
-
 ####################################################################################################
 # Main script execution
 Set-ExecutionPolicyForCurrentUser
@@ -128,5 +108,3 @@ Set-ExecutionPolicyForCurrentUser
 Install-WingetPackages -Packages $wingetPackages
 
 Install-ScoopPackages -Packages $scoopPackages
-
-Install-CargoPackages -Packages $cargoPackages
