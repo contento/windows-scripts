@@ -10,14 +10,22 @@ In short, this file is a portable profile backup I can dot-source when `$PROFILE
 
 # ---- Fastfetch
 # scoop install fastfetch
-fastfetch --logo none --structure "OS:Shell:CPU:Memory:Uptime"
+if (Get-Command fastfetch -ErrorAction SilentlyContinue) {
+  fastfetch --logo none --structure "OS:Shell:CPU:Memory:Uptime"
+}
 
 # ---- Starship
 # https://github.com/starship/starship
-# scoop install starship 
-Invoke-Expression (&starship init powershell)
+# scoop install starship
+if (Get-Command starship -ErrorAction SilentlyContinue) {
+  Invoke-Expression (&starship init powershell)
+}
 
-Invoke-Expression (& { (zoxide init powershell | Out-String) })
+# ---- Zoxide
+# scoop install zoxide
+if (Get-Command zoxide -ErrorAction SilentlyContinue) {
+  Invoke-Expression (& { (zoxide init powershell | Out-String) })
+}
 
 # ---- PSReadline
 
