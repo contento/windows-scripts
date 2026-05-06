@@ -13,7 +13,24 @@ A portable PowerShell profile kept in version control, compatible with both Wind
 - **bat wrapper** — `cat` with syntax highlighting
 - **Environment variables** — sets `Editor`, `MSYS2_ARG_CONV_EXCL`, `MSYS_NO_PATHCONV`, `YAZI_FILE_ONE`
 
-## Prerequisites (via Scoop)
+## Prerequisites
+
+### Option 1 — winget
+
+```powershell
+winget install fastfetch-cli.fastfetch Starship.Starship ajeetdsouza.zoxide eza-community.eza sharkdp.bat sxyazi.yazi Neovim.Neovim
+```
+
+### Option 2 — Scoop
+
+If Scoop is not installed yet:
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+Invoke-RestMethod get.scoop.sh | Invoke-Expression
+```
+
+Then install the packages:
 
 ```powershell
 scoop install fastfetch starship zoxide eza bat yazi neovim
@@ -26,7 +43,7 @@ scoop install fastfetch starship zoxide eza bat yazi neovim
 **Option 1 — load without touching `$PROFILE`**
 
 ```powershell
-"$Env:ProgramFiles\PowerShell\7\pwsh.exe" -NoProfile -NoExit -File "$Env:OneDriveCommercial\scripts\Pwsh-Profile.ps1"
+"$Env:ProgramFiles\PowerShell\7\pwsh.exe" -NoProfile -NoExit -File "$Env:OneDrive\scripts\Pwsh-Profile.ps1"
 ```
 
 **Option 2 — hard-link + dot-source from `$PROFILE`**
@@ -34,13 +51,13 @@ scoop install fastfetch starship zoxide eza bat yazi neovim
 `$PROFILE` resolves to `%USERPROFILE%\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`
 
 ```powershell
-cmd /c mklink /H "$Env:OneDriveCommercial\Scripts\Pwsh-Profile.ps1" "$HOME\Projects\Berkshire\playground-powershell\Pwsh-Profile\Pwsh-Profile.ps1"
+cmd /c mklink /H "$Env:OneDrive\Scripts\Pwsh-Profile.ps1" "$HOME\Projects\contento\windows-scripts\Pwsh-Profile.ps1"
 ```
 
 Then add to `$PROFILE`:
 
 ```powershell
-. "$Env:OneDriveCommercial\Scripts\Pwsh-Profile.ps1"
+. "$Env:OneDrive\Scripts\Pwsh-Profile.ps1"
 ```
 
 ### Windows PowerShell 5.1
@@ -48,7 +65,7 @@ Then add to `$PROFILE`:
 **Option 1 — load without touching `$PROFILE`**
 
 ```powershell
-"$Env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NoExit -File "$Env:OneDriveCommercial\scripts\Pwsh-Profile.ps1"
+"$Env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NoExit -File "$Env:OneDrive\scripts\Pwsh-Profile.ps1"
 ```
 
 **Option 2 — hard-link + dot-source from `$PROFILE`**
@@ -56,11 +73,11 @@ Then add to `$PROFILE`:
 `$PROFILE` resolves to `%USERPROFILE%\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1`
 
 ```powershell
-cmd /c mklink /H "$Env:OneDriveCommercial\Scripts\Pwsh-Profile.ps1" "$HOME\Projects\Berkshire\playground-powershell\Pwsh-Profile\Pwsh-Profile.ps1"
+cmd /c mklink /H "$Env:OneDrive\Scripts\Pwsh-Profile.ps1" "$HOME\Projects\contento\windows-scripts\Pwsh-Profile.ps1"
 ```
 
 Then add to `$PROFILE`:
 
 ```powershell
-. "$Env:OneDriveCommercial\Scripts\Pwsh-Profile.ps1"
+. "$Env:OneDrive\Scripts\Pwsh-Profile.ps1"
 ```
