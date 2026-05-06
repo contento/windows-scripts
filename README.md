@@ -1,57 +1,66 @@
-# windows-scripts
+# Pwsh-Profile
 
-Nothing fancy: just classical scripts for Windows.
+A portable PowerShell profile kept in version control, compatible with both Windows PowerShell 5.1 and PowerShell 7 (Core). Useful on machines where `$PROFILE` is unavailable, disabled, or write-protected.
 
-## Prerequisites
+## What it does
 
-```sh
-winget install git.git
-```
+- **Fastfetch** — prints a minimal system summary on startup (OS, shell, CPU, memory, uptime)
+- **Starship** — initializes the Starship prompt
+- **Zoxide** — replaces `cd` with smart directory jumping (`z` / `zi`)
+- **PSReadLine** — enables history-based inline predictions, list view, Tab menu completion, and arrow-key history search
+- **Aliases** — `Edit` → Notepad, `vim`/`v` → nvim, `y` → yazi
+- **eza wrappers** — `l`, `ll`, `la`, `lla`, `lt` with icons, color, and git status
+- **bat wrapper** — `cat` with syntax highlighting
+- **Environment variables** — sets `Editor`, `MSYS2_ARG_CONV_EXCL`, `MSYS_NO_PATHCONV`, `YAZI_FILE_ONE`
 
-Also, 
-
-- Make sure SSH Open Server Agent is enabled.
-- If you get errors because of your ssh client, see below.
-
-### Open SSH and Git
-
-```sh
-Cloning into '{{repository}}'...
-git@bitbucket.org: Permission denied (publickey).
-fatal: Could not read from remote repository.
-
-Please make sure you have the correct access rights
-and the repository exists.
-```
-
-Use:
-
-```sh
-git config --global core.sshCommand c:/Windows/System32/OpenSSH/ssh.exe
-# you may need to change the config if you are having buffering issues
-#  git config --global core. Compression 0
-```
-
-## New-Apps
-
-Install a bunch of apps
-
-## Backup-Me.ps1
-
-For example, to backup your PowerShell profile:
+## Prerequisites (via Scoop)
 
 ```powershell
-    notepad $PROFILE # just checking
-    ./Backup-Me.ps1  # the script
-
+scoop install fastfetch starship zoxide eza bat yazi neovim
 ```
 
-> Depends on `Backup-Target.ps1`
+## Setup
 
-## PowerShell $PROFILE
+### PowerShell 7 (Core)
 
-You may want to keep this copy up to date
+**Option 1 — load without touching `$PROFILE`**
 
-```sh
-cp $PROFILE Pwsh-Profile.ps1
+```powershell
+"$Env:ProgramFiles\PowerShell\7\pwsh.exe" -NoProfile -NoExit -File "$Env:OneDriveCommercial\scripts\Pwsh-Profile.ps1"
+```
+
+**Option 2 — hard-link + dot-source from `$PROFILE`**
+
+`$PROFILE` resolves to `%USERPROFILE%\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`
+
+```powershell
+cmd /c mklink /H "$Env:OneDriveCommercial\Scripts\Pwsh-Profile.ps1" "$HOME\Projects\Berkshire\playground-powershell\Pwsh-Profile\Pwsh-Profile.ps1"
+```
+
+Then add to `$PROFILE`:
+
+```powershell
+. "$Env:OneDriveCommercial\Scripts\Pwsh-Profile.ps1"
+```
+
+### Windows PowerShell 5.1
+
+**Option 1 — load without touching `$PROFILE`**
+
+```powershell
+"$Env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NoExit -File "$Env:OneDriveCommercial\scripts\Pwsh-Profile.ps1"
+```
+
+**Option 2 — hard-link + dot-source from `$PROFILE`**
+
+`$PROFILE` resolves to `%USERPROFILE%\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1`
+
+```powershell
+cmd /c mklink /H "$Env:OneDriveCommercial\Scripts\Pwsh-Profile.ps1" "$HOME\Projects\Berkshire\playground-powershell\Pwsh-Profile\Pwsh-Profile.ps1"
+```
+
+Then add to `$PROFILE`:
+
+```powershell
+. "$Env:OneDriveCommercial\Scripts\Pwsh-Profile.ps1"
 ```
