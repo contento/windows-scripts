@@ -109,45 +109,38 @@ biosps2 = true
 
 ### `[autoexec]` — Global Aliases
 
-Keep this minimal in the global config. Just load the alias macros — no mounts (mounts belong in per-project configs).
+Keep this minimal in the global config. **No mounts** (mounts belong in per-project configs) and **no `DOSKEY` macros** — see the note below.
 
 ```ini
 [autoexec]
 @echo off
-DOSKEY /BUFSIZE=4096 /LISTSIZE=256
-doskey ls=dir /w /o:n $*
-doskey ll=dir /o:n $*
-doskey la=dir /a /o:n $*
-doskey l=dir /w /o:n $*
-doskey ..=cd ..
-doskey ...=cd ..\..
-doskey pwd=cd
-doskey cat=type $*
-doskey rm=del $*
-doskey cp=copy $*
-doskey mv=move $*
-doskey mkdir=md $*
-doskey rmdir=rd $*
-doskey touch=copy nul $*
-doskey clear=cls
-doskey grep=find $*
-doskey df=mem
-doskey free=mem
-doskey ps=mem /c /p
-doskey uname=ver
-doskey history=doskey /history
-doskey h=doskey /history
-doskey aliases=doskey /macros
+rem No DOSKEY here: DOSKEY is not available on the Z:\ drive, only on
+rem a real DOS install mounted via IMGMOUNT. Per-project autoexec
+rem blocks that mount a DOS image can add their own DOSKEY macros.
+rem DOSBox-X already provides a built-in `ls` on Z:\.
 ```
 
-### Notes on the aliases
+### Why no `DOSKEY` here
 
-- `$*` forwards all arguments to the underlying command.
-- `grep` maps to DOS `FIND`. Syntax: `find "pattern" file.txt` (quotes required, no regex).
-- `ps` maps to `mem /c /p` — lists loaded modules, the closest DOS equivalent to a process list.
-- `touch` creates an empty file via `copy nul`. It does not update timestamps on existing files.
-- Aliases live only in the current `COMMAND.COM` session. Sub-shells spawned by other programs will not inherit them.
-- Run `aliases` at the prompt at any time to list every active macro.
+An earlier revision of this spec loaded a long list of `doskey` aliases
+in the global `[autoexec]`. On a fresh DOSBox-X launch the user lands
+on the internal `Z:\` drive, which does **not** ship `DOSKEY.COM` (or
+expose it as an internal command). Every `doskey ...` line at startup
+errors with `Bad command or filename`. The aliases also expand only
+inside that one `COMMAND.COM` session, so any program that spawns its
+own shell loses them anyway.
+
+Cleaner alternatives if you want Unix-style aliases:
+
+1. **Per-project autoexec that mounts a real DOS install**: add the
+   `doskey ...` lines there, after the `IMGMOUNT` of an MS-DOS 6.22 disk
+   image that has `DOSKEY.COM`. The macros then live with the project.
+2. **4DOS as the command processor**: DOSBox-X bundles `4DOS.COM` on
+   `Z:\`. 4DOS has native `alias` support, persistent across sessions
+   via `4start.bat`. Switch the shell via the `[config]` section or by
+   running `4dos` from `[autoexec]`.
+3. **Live with the built-ins**: `ls` is already a native DOSBox-X command
+   on `Z:\` and covers the most common case.
 
 ---
 

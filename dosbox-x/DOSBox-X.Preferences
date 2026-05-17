@@ -1454,27 +1454,7 @@ biosps2 = true
 
 [autoexec]
 @echo off
-DOSKEY /BUFSIZE=4096 /LISTSIZE=256
-doskey ls=dir /w /o:n $*
-doskey ll=dir /o:n $*
-doskey la=dir /a /o:n $*
-doskey l=dir /w /o:n $*
-doskey ..=cd ..
-doskey ...=cd ..\..
-doskey pwd=cd
-doskey cat=type $*
-doskey rm=del $*
-doskey cp=copy $*
-doskey mv=move $*
-doskey mkdir=md $*
-doskey rmdir=rd $*
-doskey touch=copy nul $*
-doskey clear=cls
-doskey grep=find $*
-doskey df=mem
-doskey free=mem
-doskey ps=mem /c /p
-doskey uname=ver
-doskey history=doskey /history
-doskey h=doskey /history
-doskey aliases=doskey /macros
+rem No DOSKEY here: DOSKEY is not available on the Z:\ drive, only on
+rem a real DOS install mounted via IMGMOUNT. Per-project autoexec
+rem blocks that mount a DOS image can add their own DOSKEY macros.
+rem DOSBox-X already provides a built-in `ls` on Z:\.
