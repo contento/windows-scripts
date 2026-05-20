@@ -1,5 +1,14 @@
 # Pwsh-Profile
 
+```text
+  o  o
+\______/
+  |
+     |    https://conten.to
+--------
+```
+
+
 A portable PowerShell profile kept in version control, compatible with both Windows PowerShell 5.1 and PowerShell 7 (Core). Useful on machines where `$PROFILE` is unavailable, disabled, or write-protected.
 
 ## What it does
