@@ -24,7 +24,6 @@ $LinkInfo = @{
   "C:/Music"                 = "$Env:OneDriveConsumer/Music";
   "C:/Photos"                = "$Env:OneDriveConsumer/Photos";
   "C:/Pictures"              = "$Env:OneDriveConsumer/Pictures";
-  "C:/Projects"              = "P:/";
   "C:/Staging"               = "$Env:OneDriveConsumer/Staging";
   "C:/Videos"                = "$Env:OneDriveConsumer/Videos";
   "C:/Temp"                  = "$Home/Temp";
