@@ -11,6 +11,7 @@ Backup Target either by copying or zipping it
 .\BackupTarget.ps1 c:/temp/settings.json c:/backup -Uncompressed:$true -DateFormat "yyyy-MM-dd"
 .NOTES
 :-) GC (-:
+GitHub: https://github.com/contento
 #>
 
 #requires -version 6

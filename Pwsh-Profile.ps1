@@ -1,11 +1,15 @@
 <#
-Why this script exists
-- Keeps my PowerShell startup configuration in version control.
-- Lets me load the same shell setup on any machine without relying only on the user profile path.
-- Useful in locked-down, temporary, or remote environments where I may not have access to `$PROFILE`
-    (for example: profile loading is disabled, the profile path is unavailable, or I do not have write permission).
+.SYNOPSIS
+  Portable PowerShell startup profile for locked-down or temporary environments.
 
-In short, this file is a portable profile backup I can dot-source when `$PROFILE` is not usable.
+.DESCRIPTION
+  Keeps PowerShell startup configuration in version control and makes it easy to
+  load the same shell setup on any machine without relying on the user profile.
+  Useful when `$PROFILE` is unavailable, disabled, or write-protected.
+
+.NOTES
+  FileName: Pwsh-Profile.ps1
+  GitHub: https://github.com/contento
 #>
 
 # ---- Fastfetch

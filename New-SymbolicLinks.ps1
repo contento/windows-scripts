@@ -1,52 +1,81 @@
+<#
+.SYNOPSIS
+  Create symbolic links for common user folders.
+
+.DESCRIPTION
+  This script ensures configured target directories exist and creates
+  symbolic links for user folders such as Backup, Music, Pictures, and Temp.
+
+.NOTES
+  FileName: New-SymbolicLinks.ps1
+  GitHub: https://github.com/contento
+#>
 #requires -RunAsAdministrator
 
-# Ensure P: drive exists
-if (-not (Test-Path -Path "P:\")) {
-  Write-Output "Drive P: does not exist. Creating it..."
-  $projectsPath = "$Home/Projects"
-  if (-not (Test-Path -Path $projectsPath)) {
-    Write-Output "Creating directory $projectsPath..."
-    New-Item -ItemType Directory -Path $projectsPath -ErrorAction Stop
-  }
-  subst P: $projectsPath 
-  Write-Output "Drive P: created and mapped to $projectsPath."
-
-    # Make the mapping persistent
-  Write-Output "Making the P: drive mapping persistent..."
-  reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "MapPDrive" /t REG_SZ /d "subst P: $projectsPath" /f
-  Write-Output "P: drive mapping made persistent." 
+if (-not $IsWindows) {
+    Write-Host 'This script is intended for Windows PowerShell only.' -ForegroundColor Red
+    exit 1
 }
 
-# To Folders
+function Write-Info {
+    param([string]$Message)
+    Write-Host $Message -ForegroundColor Cyan
+}
+
+function Write-Success {
+    param([string]$Message)
+    Write-Host $Message -ForegroundColor Green
+}
+
+function Write-WarningLine {
+    param([string]$Message)
+    Write-Host $Message -ForegroundColor Yellow
+}
+
+function Write-ErrorLine {
+    param([string]$Message)
+    Write-Host $Message -ForegroundColor Red
+}
+
 $LinkInfo = @{
-  "C:/Backup"                = "$Env:OneDriveConsumer/Backup";
-  "C:/Logs"                  = "$Home/Logs";
-  "C:/Music"                 = "$Env:OneDriveConsumer/Music";
-  "C:/Photos"                = "$Env:OneDriveConsumer/Photos";
-  "C:/Pictures"              = "$Env:OneDriveConsumer/Pictures";
-  "C:/Staging"               = "$Env:OneDriveConsumer/Staging";
-  "C:/Videos"                = "$Env:OneDriveConsumer/Videos";
-  "C:/Temp"                  = "$Home/Temp";
-  "C:/Tools"                 = "$Env:APPDATA/Ghisler/Tools";
-  "$Home/Downloads/Assets"   = "\\tesoro\Assets";
-  "$Home/Downloads/Material" = "$Env:OneDriveConsumer/Pictures/Material";
-  "$Home/Downloads/Temp"     = "$Home/Temp";
-  "$Home/Downloads/WIP"      = "$Env:OneDriveConsumer/WIP";
+    'C:\Backup'                = "$Env:OneDriveConsumer\Backup";
+    'C:\Logs'                  = "$Home\Logs";
+    'C:\Music'                 = "$Env:OneDriveConsumer\Music";
+    'C:\Photos'                = "$Env:OneDriveConsumer\Photos";
+    'C:\Pictures'              = "$Env:OneDriveConsumer\Pictures";
+    'C:\Videos'                = "$Env:OneDriveConsumer\Videos";
+    'C:\Temp'                  = "$Home\Temp";
+    "$Home\Downloads\Material" = "$Env:OneDriveConsumer\Pictures\Material";
+    "$Home\Downloads\Temp"     = "$Home\Temp";
+    "$Home\Downloads\WIP"      = "$Env:OneDriveConsumer\WIP";
 }
 
-$LinkInfo.GetEnumerator() | ForEach-Object {
-  $path = $_.Key
-  $target = $_.Value
+foreach ($entry in $LinkInfo.GetEnumerator()) {
+    $path = $entry.Key
+    $target = $entry.Value
 
-  if (-not (Test-Path -Path $target)) {
-    Write-Output "**** [$target - directory] Creating ..."
-    New-Item -ItemType Directory -Path $target -ErrorAction Continue
-  }
+    if (-not (Test-Path -Path $target -PathType Container)) {
+        Write-Info "**** Creating directory: $target"
+        New-Item -ItemType Directory -Path $target -ErrorAction Stop | Out-Null
+    }
 
-  if (Test-Path -Path $path) {
-    Write-Output "     [link] Removing existing link at $path"
-    Remove-Item -Path $path -Force -Recurse -ErrorAction Continue
-  }
-  Write-Output "     [$target - link] Creating from $path to $target"
-  New-Item -ItemType SymbolicLink -Path $path -Target $target -ErrorAction Continue
+    $existing = Get-Item -LiteralPath $path -ErrorAction SilentlyContinue
+    if ($existing) {
+        if ($existing.Attributes -band [System.IO.FileAttributes]::ReparsePoint) {
+            Write-Info "Removing existing symbolic link: $path"
+            Remove-Item -LiteralPath $path -Force -Recurse -ErrorAction Stop
+        }
+        else {
+            Write-WarningLine "Skipping: non-link item exists at $path"
+            continue
+        }
+    }
+
+    Write-Success "Creating symbolic link: $path -> $target"
+    try {
+        New-Item -ItemType SymbolicLink -Path $path -Target $target -ErrorAction Stop | Out-Null
+    }
+    catch {
+        Write-WarningLine "Failed to create symbolic link for $path -> $target: $($_.Exception.Message)"
+    }
 }

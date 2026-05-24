@@ -1,3 +1,16 @@
+<#
+.SYNOPSIS
+  Install and configure OpenSSH on Windows.
+
+.DESCRIPTION
+  This script installs the OpenSSH Server Windows capability, starts and
+  configures the sshd and ssh-agent services, and adds the SSH firewall rule.
+
+.NOTES
+  FileName: Setup-SSH.ps1
+  GitHub: https://github.com/contento
+#>
+
 #Requires -RunAsAdministrator
 
 # Install OpenSSH Server feature
@@ -73,13 +86,13 @@ Write-Host "`nVerifying SSH service status..." -ForegroundColor Cyan
 try {
     $sshdStatus = Get-Service -Name sshd
     $agentStatus = Get-Service -Name ssh-agent -ErrorAction SilentlyContinue
-    
+
     Write-Host "Service Status:" -ForegroundColor White
     Write-Host "  OpenSSH SSH Server (sshd): $($sshdStatus.Status) - Startup: $($sshdStatus.StartType)" -ForegroundColor White
     if ($agentStatus) {
         Write-Host "  OpenSSH Authentication Agent (ssh-agent): $($agentStatus.Status) - Startup: $($agentStatus.StartType)" -ForegroundColor White
     }
-    
+
     # Get and display IP address
     $ipAddress = (Get-NetIPAddress -AddressFamily IPv4 | Where-Object {$_.InterfaceAlias -notlike "*Loopback*" -and $_.IPAddress -ne "127.0.0.1"} | Select-Object -First 1).IPAddress
     if ($ipAddress) {
