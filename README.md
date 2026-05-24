@@ -52,15 +52,17 @@ scoop install fastfetch starship zoxide eza bat yazi neovim
 **Option 1 — load without touching `$PROFILE`**
 
 ```powershell
-"$Env:ProgramFiles\PowerShell\7\pwsh.exe" -NoProfile -NoExit -File "$Env:OneDrive\scripts\Pwsh-Profile.ps1"
+& "$Env:ProgramFiles\PowerShell\7\pwsh.exe" -NoProfile -NoExit -File "$Env:OneDrive\Scripts\Pwsh-Profile.ps1"
 ```
 
 **Option 2 — hard-link + dot-source from `$PROFILE`**
 
 `$PROFILE` resolves to `%USERPROFILE%\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`
 
+Use a placeholder target path for your repo, for example:
+
 ```powershell
-cmd /c mklink /H "$Env:OneDrive\Scripts\Pwsh-Profile.ps1" "$HOME\Projects\contento\windows-scripts\Pwsh-Profile.ps1"
+cmd /c mklink /H "$Env:OneDrive\Scripts\Pwsh-Profile.ps1" "$HOME\projects\windows-scripts\Pwsh-Profile.ps1"
 ```
 
 Then add to `$PROFILE`:
@@ -74,15 +76,17 @@ Then add to `$PROFILE`:
 **Option 1 — load without touching `$PROFILE`**
 
 ```powershell
-"$Env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NoExit -File "$Env:OneDrive\scripts\Pwsh-Profile.ps1"
+& "$Env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NoExit -File "$Env:OneDrive\Scripts\Pwsh-Profile.ps1"
 ```
 
 **Option 2 — hard-link + dot-source from `$PROFILE`**
 
 `$PROFILE` resolves to `%USERPROFILE%\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1`
 
+Use a placeholder target path for your repo, for example:
+
 ```powershell
-cmd /c mklink /H "$Env:OneDrive\Scripts\Pwsh-Profile.ps1" "$HOME\Projects\contento\windows-scripts\Pwsh-Profile.ps1"
+cmd /c mklink /H "$Env:OneDrive\Scripts\Pwsh-Profile.ps1" "$HOME\projects\windows-scripts\Pwsh-Profile.ps1"
 ```
 
 Then add to `$PROFILE`:
