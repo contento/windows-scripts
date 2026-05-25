@@ -7,7 +7,9 @@
       "Bash(find \"c:\\\\Users\\\\contento\" -name \"starship.toml\" -type f 2>/dev/null | head -5)",
       "Read(//c/Users/contento/**)",
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(git commit -m 'chore: allow git push in settings *)"
     ]
   }
 }
