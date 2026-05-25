@@ -27,12 +27,14 @@ read_only = " 󰌾"
 truncation_length = 3            # keep at most the last 3 path components
 truncation_symbol = "…/"         # prepend "…/" when truncation actually happened
 truncate_to_repo = false         # don't collapse to repo root; respect truncation_length instead
+format = "[$path]($style)[$read_only]($read_only_style) "
 style = "bold italic blue"
 
 [cmd_duration]
 min_time = 4000          # milliseconds — only show "took Ns" when a command runs ≥ 4s
 show_milliseconds = false
 disabled = false
+format = "took [$duration]($style) "
 style = "bold italic red"
 
 [aws]

@@ -58,10 +58,42 @@ function Setup-ProfileLink {
     }
 }
 
+function Initialize-StarshipConfig {
+    $StarshipSource = Join-Path $ScriptRoot '.config' 'starship' 'starship.toml'
+    $StarshipConfigDir = Join-Path $HOME '.config'
+    $StarshipConfigPath = Join-Path $StarshipConfigDir 'starship.toml'
+
+    if (-not (Test-Path $StarshipSource)) {
+        Write-Host "⚠ Starship config not found at: $StarshipSource"
+        return
+    }
+
+    if (-not (Test-Path $StarshipConfigDir)) {
+        Write-Host "Creating directory: $StarshipConfigDir"
+        New-Item -ItemType Directory -Path $StarshipConfigDir -Force | Out-Null
+    }
+
+    if (Test-Path $StarshipConfigPath) {
+        Write-Host "Starship config already exists at: $StarshipConfigPath"
+        $response = Read-Host "Overwrite? (y/n)"
+        if ($response -ne 'y') {
+            Write-Host "Skipped."
+            return
+        }
+        Remove-Item $StarshipConfigPath -Force
+    }
+
+    Copy-Item $StarshipSource $StarshipConfigPath
+    Write-Host "✓ Starship config copied successfully"
+}
+
 Write-Host "Setting up PowerShell profiles..."
 Write-Host "Source: $ProfileSource`n"
 
 Setup-ProfileLink -ProfileDir $PS7ProfileDir -ProfilePath $PS7Profile -VersionName "PowerShell 7 (Core)"
 Setup-ProfileLink -ProfileDir $PS5ProfileDir -ProfilePath $PS5Profile -VersionName "Windows PowerShell 5.1"
+
+Write-Host "`nSetting up Starship config..."
+Initialize-StarshipConfig
 
 Write-Host "`nDone!"

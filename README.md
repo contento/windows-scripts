@@ -8,12 +8,12 @@
 --------
 ```
 
-A portable PowerShell profile kept in version control, compatible with both Windows PowerShell 5.1 and PowerShell 7 (Core). Useful on machines where `$PROFILE` is unavailable, disabled, or write-protected.
+A portable PowerShell profile kept in version control, compatible with both Windows PowerShell 5.1 and PowerShell 7 (Core). Useful on machines where `$PROFILE` is unavailable, disabled, or write-protected. Includes bundled Starship configuration that's automatically installed during setup.
 
 ## What it does
 
 - **Fastfetch** — prints a minimal system summary on startup (OS, shell, CPU, memory, uptime)
-- **Starship** — initializes the Starship prompt with bundled configuration (`.config/starship/starship.toml`)
+- **Starship** — initializes the Starship prompt with bundled configuration (installed to `~/.config/starship.toml`)
 - **Zoxide** — replaces `cd` with smart directory jumping (`z` / `zi`)
 - **PSReadLine** — enables history-based inline predictions, list view, Tab menu completion, and arrow-key history search
 - **Aliases** — `Edit` → Notepad, `vim`/`v` → nvim, `y` → yazi

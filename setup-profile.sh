@@ -78,4 +78,5 @@ setup_ps_profile
 setup_bash_profile
 
 echo ""
+echo "Note: Starship config is handled by stow-all"
 echo "Done!"
