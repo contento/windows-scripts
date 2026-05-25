@@ -8,7 +8,7 @@
   Useful when `$PROFILE` is unavailable, disabled, or write-protected.
 
 .NOTES
-  FileName: Pwsh-Profile.ps1
+  FileName: profile.ps1
   GitHub: https://github.com/contento
 #>
 
@@ -21,6 +21,7 @@ if (Get-Command fastfetch -ErrorAction SilentlyContinue) {
 # ---- Starship
 # scoop install starship
 if (Get-Command starship -ErrorAction SilentlyContinue) {
+    $env:STARSHIP_CONFIG = Join-Path $PSScriptRoot '.config\starship\starship.toml'
     Invoke-Expression (&starship init powershell)
 }
 

@@ -1,4 +1,4 @@
-# Pwsh-Profile
+# PowerShell Profile
 
 ```text
   o  o
@@ -8,13 +8,12 @@
 --------
 ```
 
-
 A portable PowerShell profile kept in version control, compatible with both Windows PowerShell 5.1 and PowerShell 7 (Core). Useful on machines where `$PROFILE` is unavailable, disabled, or write-protected.
 
 ## What it does
 
 - **Fastfetch** — prints a minimal system summary on startup (OS, shell, CPU, memory, uptime)
-- **Starship** — initializes the Starship prompt
+- **Starship** — initializes the Starship prompt with bundled configuration (`.config/starship/starship.toml`)
 - **Zoxide** — replaces `cd` with smart directory jumping (`z` / `zi`)
 - **PSReadLine** — enables history-based inline predictions, list view, Tab menu completion, and arrow-key history search
 - **Aliases** — `Edit` → Notepad, `vim`/`v` → nvim, `y` → yazi
@@ -47,50 +46,18 @@ scoop install fastfetch starship zoxide eza bat yazi neovim
 
 ## Setup
 
-### PowerShell 7 (Core)
+### Windows (PowerShell 7 + Windows PowerShell 5.1)
 
-**Option 1 — load without touching `$PROFILE`**
+Run `Setup-Profile.ps1` from the repo to automatically create hard links in both PowerShell's $PROFILE locations:
 
 ```powershell
-& "$Env:ProgramFiles\PowerShell\7\pwsh.exe" -NoProfile -NoExit -File "$Env:OneDrive\Scripts\Pwsh-Profile.ps1"
+.\Setup-Profile.ps1
 ```
 
-**Option 2 — hard-link + dot-source from `$PROFILE`**
+### macOS / Linux
 
-`$PROFILE` resolves to `%USERPROFILE%\Documents\PowerShell\Microsoft.PowerShell_profile.ps1`
+Run `setup-profile.sh` from the repo:
 
-Use a placeholder target path for your repo, for example:
-
-```powershell
-cmd /c mklink /H "$Env:OneDrive\Scripts\Pwsh-Profile.ps1" "$HOME\projects\windows-scripts\Pwsh-Profile.ps1"
-```
-
-Then add to `$PROFILE`:
-
-```powershell
-. "$Env:OneDrive\Scripts\Pwsh-Profile.ps1"
-```
-
-### Windows PowerShell 5.1
-
-**Option 1 — load without touching `$PROFILE`**
-
-```powershell
-& "$Env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NoExit -File "$Env:OneDrive\Scripts\Pwsh-Profile.ps1"
-```
-
-**Option 2 — hard-link + dot-source from `$PROFILE`**
-
-`$PROFILE` resolves to `%USERPROFILE%\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1`
-
-Use a placeholder target path for your repo, for example:
-
-```powershell
-cmd /c mklink /H "$Env:OneDrive\Scripts\Pwsh-Profile.ps1" "$HOME\projects\windows-scripts\Pwsh-Profile.ps1"
-```
-
-Then add to `$PROFILE`:
-
-```powershell
-. "$Env:OneDrive\Scripts\Pwsh-Profile.ps1"
+```bash
+./setup-profile.sh
 ```

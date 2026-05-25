@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/contento/projects/contento/dotfiles/starship/.config/starship/**)",
+      "Bash(chmod +x \"c:\\\\Users\\\\contento\\\\Projects\\\\contento\\\\windows-scripts\\\\setup-profile.sh\")",
+      "Bash(git rm *)",
+      "Bash(find \"c:\\\\Users\\\\contento\" -name \"starship.toml\" -type f 2>/dev/null | head -5)",
+      "Read(//c/Users/contento/**)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
+    ]
+  }
+}
