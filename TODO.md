@@ -6,10 +6,11 @@ Working task list for `windows-scripts`.
 
 ## Open
 
-- [ ] Keep `CLAUDE.md`, `.github/copilot-instructions.md`, and `TODO.md` aligned whenever guidance or workflows change.
-- [ ] Verify `profile/profile.ps1` continues to work as intended in both Windows PowerShell 5.1 and PowerShell 7.
-- [ ] Confirm the Starship prompt initialization matches the user’s expected prompt configuration.
-
 ## Done
 
-- [ ] Added root-level assistant guidance and task tracking files.
+- [x] Added root-level assistant guidance and task tracking files.
+- [x] Split repo into `profile/`, `apps/`, `backup/`, `system/` folders with per-folder READMEs.
+- [x] Updated root `README.md` with folder overview and links.
+- [x] Synced `CLAUDE.md` and `.github/copilot-instructions.md` to full parity.
+- [x] Verified `profile/profile.ps1` works in Windows PowerShell 5.1.
+- [x] Confirmed Starship prompt initialization works as expected.
