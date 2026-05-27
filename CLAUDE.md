@@ -9,10 +9,15 @@ Guidance for Claude Code when working in this repository.
 Portable PowerShell startup configuration for Windows PowerShell 5.1 and PowerShell 7.
 This repository contains a version-controlled profile that can be loaded without writing to `$PROFILE`.
 
-Key files:
+Key files and folders:
 
-- `Pwsh-Profile.ps1` — the main profile implementation.
-- `README.md` — usage, setup, and installation guidance.
+- `profile/profile.ps1` — the main profile implementation.
+- `profile/Setup-Profile.ps1` — Windows setup script (hard links + Starship config).
+- `profile/setup-profile.sh` — macOS/Linux setup script.
+- `apps/New-Apps.ps1` — installs apps via winget and Scoop.
+- `backup/` — `Backup-Target.ps1` (engine) and `Backup-Me.ps1` (profile wrapper).
+- `system/` — `Setup-SSH.ps1` and `New-SymbolicLinks.ps1`.
+- `README.md` — overview and links to each folder's README.
 
 ## Working rules
 

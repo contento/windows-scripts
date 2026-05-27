@@ -7,7 +7,7 @@ Working task list for `windows-scripts`.
 ## Open
 
 - [ ] Keep `CLAUDE.md`, `.github/copilot-instructions.md`, and `TODO.md` aligned whenever guidance or workflows change.
-- [ ] Verify `Pwsh-Profile.ps1` continues to work as intended in both Windows PowerShell 5.1 and PowerShell 7.
+- [ ] Verify `profile/profile.ps1` continues to work as intended in both Windows PowerShell 5.1 and PowerShell 7.
 - [ ] Confirm the Starship prompt initialization matches the user’s expected prompt configuration.
 
 ## Done

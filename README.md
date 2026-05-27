@@ -1,4 +1,4 @@
-# PowerShell Profile
+# Windows Scripts
 
 ```text
   o  o
@@ -8,56 +8,20 @@
 --------
 ```
 
-A portable PowerShell profile kept in version control, compatible with both Windows PowerShell 5.1 and PowerShell 7 (Core). Useful on machines where `$PROFILE` is unavailable, disabled, or write-protected. Includes bundled Starship configuration that's automatically installed during setup.
+A collection of portable PowerShell scripts for Windows setup and daily use — version-controlled and easy to deploy on a new machine.
 
-## What it does
+## Contents
 
-- **Fastfetch** — prints a minimal system summary on startup (OS, shell, CPU, memory, uptime)
-- **Starship** — initializes the Starship prompt with bundled configuration (installed to `~/.config/starship.toml`)
-- **Zoxide** — replaces `cd` with smart directory jumping (`z` / `zi`)
-- **PSReadLine** — enables history-based inline predictions, list view, Tab menu completion, and arrow-key history search
-- **Aliases** — `Edit` → Notepad, `vim`/`v` → nvim, `y` → yazi
-- **eza wrappers** — `l`, `ll`, `la`, `lla`, `lt` with icons, color, and git status
-- **bat wrapper** — `cat` with syntax highlighting
-- **Environment variables** — sets `Editor`, `MSYS2_ARG_CONV_EXCL`, `MSYS_NO_PATHCONV`, `YAZI_FILE_ONE`
+| Folder | Description |
+| ------ | ----------- |
+| [profile/](profile/) | PowerShell startup profile (Fastfetch, Starship, Zoxide, PSReadLine, aliases) and setup scripts |
+| [apps/](apps/) | Install a curated set of apps via winget and Scoop |
+| [backup/](backup/) | Back up files and folders to OneDrive with automatic archiving |
+| [system/](system/) | One-time system setup: OpenSSH and user-folder symbolic links |
 
-## Prerequisites
+## Quick start
 
-### Option 1 — winget
-
-```powershell
-winget install fastfetch-cli.fastfetch Starship.Starship ajeetdsouza.zoxide eza-community.eza sharkdp.bat sxyazi.yazi Neovim.Neovim
-```
-
-### Option 2 — Scoop
-
-If Scoop is not installed yet:
-
-```powershell
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-Invoke-RestMethod get.scoop.sh | Invoke-Expression
-```
-
-Then install the packages:
-
-```powershell
-scoop install fastfetch starship zoxide eza bat yazi neovim
-```
-
-## Setup
-
-### Windows (PowerShell 7 + Windows PowerShell 5.1)
-
-Run `Setup-Profile.ps1` from the repo to automatically create hard links in both PowerShell's $PROFILE locations:
-
-```powershell
-.\Setup-Profile.ps1
-```
-
-### macOS / Linux
-
-Run `setup-profile.sh` from the repo:
-
-```bash
-./setup-profile.sh
-```
+1. **Install tools** — see [apps/README.md](apps/README.md) or run `apps\New-Apps.ps1`.
+2. **Set up the profile** — see [profile/README.md](profile/README.md) or run `profile\Setup-Profile.ps1` (Windows) / `profile/setup-profile.sh` (macOS/Linux).
+3. **Configure system** _(optional, admin required)_ — see [system/README.md](system/README.md).
+4. **Set up backups** _(optional)_ — see [backup/README.md](backup/README.md).
