@@ -5,32 +5,54 @@
 .DESCRIPTION
   Keeps PowerShell startup configuration in version control and makes it easy to
   load the same shell setup on any machine without relying on the user profile.
-  Useful when `$PROFILE` is unavailable, disabled, or write-protected.
+  Useful when $PROFILE is unavailable, disabled, or write-protected — dot-source
+  this file directly instead.
+
+  Heavy init (fastfetch, starship, zoxide) is guarded to ConsoleHost only to
+  prevent double-execution when loaded inside VS Code's integrated terminal.
+
+.EXAMPLE
+  . .\profile.ps1
+
+.EXAMPLE
+  # Add to your $PROFILE so it loads automatically:
+  . "$env:USERPROFILE\Projects\contento\windows-scripts\profile\profile.ps1"
 
 .NOTES
   FileName: profile.ps1
   GitHub: https://github.com/contento
+  Admin: Not required
 #>
 
-# ---- Fastfetch
-# scoop install fastfetch
-if (Get-Command fastfetch -ErrorAction SilentlyContinue) {
-    fastfetch --logo none --structure 'OS:Shell:CPU:Memory:Uptime'
-}
+# ---- Heavy init (skip in VS Code / non-interactive hosts)
+if ($Host.Name -eq 'ConsoleHost') {
 
-# ---- Starship
-# scoop install starship
-if (Get-Command starship -ErrorAction SilentlyContinue) {
-    $env:STARSHIP_CONFIG = Join-Path $PSScriptRoot '.config\starship\starship.toml'
-    Invoke-Expression (&starship init powershell)
-}
+    # ---- Fastfetch
+    # scoop install fastfetch
+    if (Get-Command fastfetch -ErrorAction SilentlyContinue) {
+        fastfetch --logo none --structure 'OS:Shell:CPU:Memory:Uptime'
+    }
 
-# ---- Zoxide
-# scoop install zoxide
-if (Get-Command zoxide -ErrorAction SilentlyContinue) {
-    Invoke-Expression (& { (zoxide init powershell | Out-String) })
-    Set-Alias -Name cd  -Value z  -Option AllScope -Force
-    Set-Alias -Name cdi -Value zi -Option AllScope -Force
+    # ---- Starship
+    # scoop install starship
+    if (Get-Command starship -ErrorAction SilentlyContinue) {
+        # Use the config bundled alongside this script if it exists;
+        # otherwise fall back to Starship's default (~/.config/starship.toml).
+        $bundledConfig = Join-Path $PSScriptRoot '.config\starship\starship.toml'
+        if (Test-Path -LiteralPath $bundledConfig) {
+            $env:STARSHIP_CONFIG = $bundledConfig
+        }
+        Invoke-Expression (&starship init powershell)
+    }
+
+    # ---- Zoxide
+    # scoop install zoxide
+    if (Get-Command zoxide -ErrorAction SilentlyContinue) {
+        Invoke-Expression (& { (zoxide init powershell | Out-String) })
+        Set-Alias -Name cd  -Value z  -Option AllScope -Force
+        Set-Alias -Name cdi -Value zi -Option AllScope -Force
+    }
+
 }
 
 # ---- PSReadLine
@@ -40,22 +62,58 @@ Set-PSReadLineKeyHandler -Key DownArrow -Function HistorySearchForward
 
 Set-PSReadLineOption -EditMode Windows
 
+# PredictionSource requires PSReadLine 2.1+; PredictionViewStyle requires 2.2+.
 $_psrl = (Get-Module PSReadLine).Version
 if ($_psrl -ge [version]'2.1') { Set-PSReadLineOption -PredictionSource    History  }
 if ($_psrl -ge [version]'2.2') { Set-PSReadLineOption -PredictionViewStyle ListView }
 Remove-Variable _psrl
 
 # ---- Aliases
-New-Alias -Name Edit -Value notepad -Force -ErrorAction SilentlyContinue
+New-Alias -Name Edit  -Value notepad     -Force -ErrorAction SilentlyContinue
+New-Alias -Name which -Value Get-Command -Force
 
 if (Get-Command nvim -ErrorAction SilentlyContinue) {
     New-Alias -Name vim -Value nvim -Force
-    New-Alias -Name v   -Value nvim -Force
+    function v { nvim . }
+}
+
+if (Get-Command code -ErrorAction SilentlyContinue) {
+    function c  { code . }
+    function ep { code $PROFILE }
 }
 
 if (Get-Command yazi -ErrorAction SilentlyContinue) {
     New-Alias -Name y -Value yazi -Force
 }
+
+if (Get-Command git -ErrorAction SilentlyContinue) {
+    function gs { git status @args }
+    function gl { git log --oneline --graph --decorate @args }
+    function gd { git diff @args }
+    function gp { git push @args }
+}
+
+if (Get-Command rg -ErrorAction SilentlyContinue) {
+    New-Alias -Name grep -Value rg -Force
+}
+
+if (Get-Command scoop -ErrorAction SilentlyContinue) {
+    function sup { scoop update * }
+}
+
+function touch {
+    foreach ($f in $args) {
+        if (Test-Path $f) { (Get-Item $f).LastWriteTime = Get-Date }
+        else              { New-Item -ItemType File -Path $f | Out-Null }
+    }
+}
+
+function reload { . $PROFILE }
+function path   { $env:PATH -split ';' }
+function ..     { Set-Location .. }
+function ...    { Set-Location ..\.. }
+
+New-Alias -Name clip -Value Set-Clipboard -Force -ErrorAction SilentlyContinue
 
 # ---- eza  (ls replacements)
 # scoop install eza
@@ -76,7 +134,7 @@ if (Get-Command bat -ErrorAction SilentlyContinue) {
 # ---- Environment variables
 # Uses [Environment]::SetEnvironmentVariable instead of setx: no subprocess, no 1024-char limit.
 # Skips the registry write when the value is already correct.
-# $IsWindows is $null in PS5 (always Windows) and $true/$false in PS Core.
+# $IsWindows is $null in PS 5.1 (always Windows) and $true/$false in PS 7+.
 if ($IsWindows -ne $false) {
     $envVars = @{
         Editor              = 'notepad'
