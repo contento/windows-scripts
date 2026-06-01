@@ -16,6 +16,7 @@ Key files and folders:
 - `profile/setup-profile.sh` — macOS/Linux setup script.
 - `apps/New-Apps.ps1` — installs apps via winget and Scoop.
 - `backup/` — `Backup-Target.ps1` (engine) and `Backup-Me.ps1` (profile wrapper).
+- `compress-this/Compress-This.ps1` — timestamped 7-Zip archive of the current folder; `-Dev` excludes build artifacts and caches.
 - `system/` — `Setup-SSH.ps1` and `New-SymbolicLinks.ps1`.
 - `README.md` — overview and links to each folder's README.
 

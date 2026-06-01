@@ -17,6 +17,7 @@ A collection of portable PowerShell scripts for Windows setup and daily use — 
 | [profile/](profile/) | PowerShell startup profile (Fastfetch, Starship, Zoxide, PSReadLine, aliases) and setup scripts |
 | [apps/](apps/) | Install a curated set of apps via winget and Scoop |
 | [backup/](backup/) | Back up files and folders to OneDrive with automatic archiving |
+| [compress-this/](compress-this/) | Timestamped 7-Zip archive of the current folder; `-Dev` excludes build artifacts and caches |
 | [system/](system/) | One-time system setup: OpenSSH and user-folder symbolic links |
 
 ## Quick start

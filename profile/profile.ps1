@@ -131,6 +131,13 @@ if (Get-Command bat -ErrorAction SilentlyContinue) {
     function cat { bat --color=always --style=plain @args }
 }
 
+# ---- Local script wrappers
+if (Test-Path -LiteralPath "$HOME\Projects\contento\windows-scripts\compress-this\Compress-This.ps1") {
+    function Compress-This {
+        & "$HOME\Projects\contento\windows-scripts\compress-this\Compress-This.ps1" @args
+    }
+}
+
 # ---- Environment variables
 # Uses [Environment]::SetEnvironmentVariable instead of setx: no subprocess, no 1024-char limit.
 # Skips the registry write when the value is already correct.
