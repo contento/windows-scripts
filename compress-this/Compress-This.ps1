@@ -34,6 +34,9 @@
 .PARAMETER Help
     Display this help message and exit.
 
+.PARAMETER WhatIf
+    Show what would be archived and where, without creating the archive.
+
 .EXAMPLE
     .\Compress-This.ps1
 
@@ -43,13 +46,16 @@
 .EXAMPLE
     .\Compress-This.ps1 -Format 7z -Dev
 
+.EXAMPLE
+    .\Compress-This.ps1 -Dev -WhatIf
+
 .NOTES
     FileName : Compress-This.ps1
     Admin    : Not required
     Requires : 7-Zip on PATH  (scoop install 7zip  or  winget install 7zip.7zip)
 #>
 
-[CmdletBinding()]
+[CmdletBinding(SupportsShouldProcess)]
 Param(
     [switch]$Help,
     [switch]$Dev,
@@ -247,6 +253,10 @@ if ($Dev) {
 $szExe      = $SevenZip
 $szArgArray = $szArgs.ToArray()
 $sourceDir  = $PWD.Path   # captured here; Start-Job in PS 5.1 starts in $env:USERPROFILE
+
+if (-not $PSCmdlet.ShouldProcess($outFile, 'Create archive')) {
+    exit 0
+}
 
 try {
     $items = Invoke-WithSpinner -Label "Compressing '$folderName'" -Block {

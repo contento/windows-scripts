@@ -7,6 +7,7 @@ Creates a timestamped 7-Zip archive of the current working directory, saved unde
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
 | `-Help` | switch | — | Display help and exit |
+| `-WhatIf` | switch | — | Show what would be archived and where, without creating the archive |
 | `-Dev` | switch | — | Exclude generated files and caches for a clean repo backup |
 | `-Format` | `zip` \| `7z` | `zip` | Archive format |
 | `-BACKUP_PATH` | string | `OneDrive\Backup` | Override output root |
@@ -69,6 +70,9 @@ Compress-This -Dev -Format 7z
 
 # Custom backup path
 Compress-This -Dev -BACKUP_PATH "D:\Backups"
+
+# Dry run — shows output path without creating the archive
+Compress-This -Dev -WhatIf
 
 # Show help
 Compress-This -Help
