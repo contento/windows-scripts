@@ -12,7 +12,7 @@
 #>
 #requires -RunAsAdministrator
 
-if (-not $IsWindows) {
+if ($PSVersionTable.Platform -eq 'Unix') {
     Write-Host 'This script is intended for Windows PowerShell only.' -ForegroundColor Red
     exit 1
 }
@@ -76,6 +76,6 @@ foreach ($entry in $LinkInfo.GetEnumerator()) {
         New-Item -ItemType SymbolicLink -Path $path -Target $target -ErrorAction Stop | Out-Null
     }
     catch {
-        Write-WarningLine "Failed to create symbolic link for $path -> $target: $($_.Exception.Message)"
+        Write-WarningLine ("Failed to create symbolic link for '{0}' -> '{1}': {2}" -f $path, $target, $_.Exception.Message)
     }
 }
