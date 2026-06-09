@@ -9,7 +9,11 @@
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
       "Bash(git push *)",
-      "Bash(git commit -m 'chore: allow git push in settings *)"
+      "Bash(git commit -m 'chore: allow git push in settings *)",
+      "PowerShell(Move-Item -Path \"$env:USERPROFILE\\\\.config\\\\starship\\\\starship.toml\" -Destination \"$env:USERPROFILE\\\\.config\\\\starship.toml\" -Force)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\contento\\.config"
     ]
   }
 }

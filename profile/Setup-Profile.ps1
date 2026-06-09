@@ -19,11 +19,12 @@ if (-not (Test-Path $ProfileSource)) {
 }
 
 # PowerShell 7 (Core)
-$PS7ProfileDir = Join-Path $HOME 'Documents\PowerShell'
+$DocumentsPath = [Environment]::GetFolderPath('MyDocuments')
+$PS7ProfileDir = Join-Path $DocumentsPath 'PowerShell'
 $PS7Profile = Join-Path $PS7ProfileDir 'Microsoft.PowerShell_profile.ps1'
 
 # Windows PowerShell 5.1
-$PS5ProfileDir = Join-Path $HOME 'Documents\WindowsPowerShell'
+$PS5ProfileDir = Join-Path $DocumentsPath 'WindowsPowerShell'
 $PS5Profile = Join-Path $PS5ProfileDir 'Microsoft.PowerShell_profile.ps1'
 
 function Setup-ProfileLink {

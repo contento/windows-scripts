@@ -141,7 +141,7 @@ function Install-WingetPackages {
                 Write-Success "Installed winget package: $_"
             }
             catch {
-                Write-WarningLine "Failed to install winget package $_: $($_.Exception.Message)"
+                Write-WarningLine "Failed to install winget package ${_}: $($_.Exception.Message)"
             }
         }
     }
@@ -197,7 +197,7 @@ function Install-ScoopPackages {
                     scoop bucket add $bucket
                 }
                 catch {
-                    Write-WarningLine "Failed to add Scoop bucket $bucket: $($_.Exception.Message)"
+                    Write-WarningLine "Failed to add Scoop bucket ${bucket}: $($_.Exception.Message)"
                 }
             }
             else {
@@ -212,7 +212,7 @@ function Install-ScoopPackages {
                 Write-Success "Installed Scoop package: $pkg"
             }
             catch {
-                Write-WarningLine "Failed to install Scoop package $pkg: $($_.Exception.Message)"
+                Write-WarningLine "Failed to install Scoop package ${pkg}: $($_.Exception.Message)"
             }
         }
     }
