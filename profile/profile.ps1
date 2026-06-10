@@ -91,11 +91,8 @@ if (Get-Command git -ErrorAction SilentlyContinue) {
     function gl { git log --oneline --graph --decorate @args }
     function gd { git diff @args }
     function gp { git push @args }
-    if (Get-Command gpl -ErrorAction SilentlyContinue) {
-        function gpll { git pull @args }
-    } else {
-        function gpl { git pull @args }
-    }
+    function gpl { git pull @args }
+    function gpll { git pull @args }
 }
 
 if (Get-Command rg -ErrorAction SilentlyContinue) {
