@@ -28,6 +28,7 @@ $wingetPackages = @{
         "IrfanSkiljan.IrfanView",
         "JAMSoftware.TreeSize.Free",
         "JesseDuffield.lazygit",
+        "Microsoft.Coreutils",  # uutils/findutils/grep multicall; no profile aliases by design (PS alias table beats PATH; rg/bat/eza already cover grep/cat/ls)
         "Microsoft.PowerShell",
         "Microsoft.SysInternals",
         "Microsoft.Teams",
@@ -136,18 +137,26 @@ function Install-WingetPackages {
         $source = $_
         $sourceArgs = if ($source -ne "nullStore") { @("--source", $source) } else { @() }
         $Packages[$source] | Sort-Object | ForEach-Object {
+            $pkg = $_
             try {
-                winget install $_ @sourceArgs --silent --accept-package-agreements --accept-source-agreements -e
-                Write-Success "Installed winget package: $_"
+                winget install $pkg @sourceArgs --silent --accept-package-agreements --accept-source-agreements -e
+                # winget signals failure via exit code, not a thrown exception.
+                # Common non-error codes: 0 = installed, -1978335189 = already installed, -1978335212 = no applicable update.
+                if ($LASTEXITCODE -in @(0, -1978335189, -1978335212)) {
+                    Write-Success "Installed winget package: $pkg"
+                }
+                else {
+                    Write-WarningLine "Failed to install winget package ${pkg} (exit code $LASTEXITCODE)."
+                }
             }
             catch {
-                Write-WarningLine "Failed to install winget package ${_}: $($_.Exception.Message)"
+                Write-WarningLine "Failed to install winget package ${pkg}: $($_.Exception.Message)"
             }
         }
     }
 }
 
-function Ensure-ScoopInstalled {
+function Install-ScoopIfMissing {
     param([switch]$ScoopOnly)
 
     if (Get-Command scoop -ErrorAction SilentlyContinue) {
@@ -182,7 +191,7 @@ function Install-ScoopPackages {
         [hashtable]$Packages
     )
 
-    if (-not (Ensure-ScoopInstalled -ScoopOnly:$ScoopOnly)) {
+    if (-not (Install-ScoopIfMissing -ScoopOnly:$ScoopOnly)) {
         return
     }
 
