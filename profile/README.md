@@ -5,7 +5,7 @@ PowerShell startup profile and setup scripts, compatible with Windows PowerShell
 ## Files
 
 | File | Description |
-|------|-------------|
+| ---- | ----------- |
 | [`profile.ps1`](profile.ps1) | Main profile — Fastfetch, Starship, Zoxide, PSReadLine, aliases, eza/bat wrappers, env vars |
 | [`Setup-Profile.ps1`](Setup-Profile.ps1) | Windows setup: creates hard links in `$PROFILE` locations for PS 7 and PS 5.1, copies Starship config |
 | [`setup-profile.sh`](setup-profile.sh) | macOS / Linux setup: creates symlinks for the PowerShell profile |
@@ -18,6 +18,7 @@ PowerShell startup profile and setup scripts, compatible with Windows PowerShell
 - **Zoxide** — replaces `cd` with smart directory jumping (`z` / `zi`)
 - **PSReadLine** — history predictions, list view, Tab menu, arrow-key history search
 - **Aliases** — `Edit` → Notepad, `vim`/`v` → nvim, `y` → yazi
+- **No Coreutils aliases** — the profile avoids overriding `ls`, `cat`, `grep`, and similar commands, which can break PowerShell pipelines
 - **eza wrappers** — `l`, `ll`, `la`, `lla`, `lt` with icons, color, and git status
 - **bat wrapper** — `cat` with syntax highlighting
 - **Environment variables** — `Editor`, `MSYS2_ARG_CONV_EXCL`, `MSYS_NO_PATHCONV`, `YAZI_FILE_ONE`

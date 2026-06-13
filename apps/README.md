@@ -5,7 +5,7 @@ Install a curated set of applications via **winget** and **Scoop**.
 ## Files
 
 | File | Description |
-|------|-------------|
+| ---- | ----------- |
 | [`New-Apps.ps1`](New-Apps.ps1) | Installs winget and Scoop packages; pass `-ScoopOnly` to skip winget |
 
 ## Usage
@@ -26,7 +26,9 @@ Install a curated set of applications via **winget** and **Scoop**.
 
 ### winget
 
-7-Zip, Bitwarden, Brave, Ditto, Total Commander, Git, IrfanView, TreeSize Free, lazygit, PowerShell 7, Sysinternals, Teams, VS Code, Firefox, Nmap, Starship, portal, Python 3, Revo Uninstaller, Beyond Compare 5, Windows Terminal, Zen Browser, zoxide.
+7-Zip, Bitwarden, Brave, Ditto, Total Commander, Git, IrfanView, TreeSize Free, lazygit, Microsoft Coreutils, PowerShell 7, Sysinternals, Teams, VS Code, Firefox, Nmap, Starship, portal, Python 3, Revo Uninstaller, Beyond Compare 5, Windows Terminal, Zen Browser, zoxide.
+
+Coreutils is installed as a direct winget package; the profile intentionally avoids aliasing its GNU-style commands to prevent PowerShell pipeline conflicts.
 
 ### Scoop (default buckets)
 
