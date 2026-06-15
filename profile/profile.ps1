@@ -99,6 +99,23 @@ if (Get-Command rg -ErrorAction SilentlyContinue) {
     New-Alias -Name grep -Value rg -Force
 }
 
+# ---- Remove conflicting built-in aliases for Microsoft Coreutils
+# PowerShell's built-in aliases take precedence over PATH, breaking commands like ls --help
+Remove-Alias -Name ls -Force -ErrorAction SilentlyContinue
+Remove-Alias -Name cat -Force -ErrorAction SilentlyContinue
+Remove-Alias -Name cp -Force -ErrorAction SilentlyContinue
+Remove-Alias -Name curl -Force -ErrorAction SilentlyContinue
+Remove-Alias -Name diff -Force -ErrorAction SilentlyContinue
+Remove-Alias -Name echo -Force -ErrorAction SilentlyContinue
+if (-not (Get-Command rg -ErrorAction SilentlyContinue)) {
+    Remove-Alias -Name grep -Force -ErrorAction SilentlyContinue
+}
+Remove-Alias -Name mv -Force -ErrorAction SilentlyContinue
+Remove-Alias -Name rm -Force -ErrorAction SilentlyContinue
+Remove-Alias -Name sort -Force -ErrorAction SilentlyContinue
+Remove-Alias -Name tee -Force -ErrorAction SilentlyContinue
+Remove-Alias -Name where -Force -ErrorAction SilentlyContinue
+
 if (Get-Command scoop -ErrorAction SilentlyContinue) {
     function sup { scoop update * }
 }
