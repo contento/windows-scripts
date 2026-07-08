@@ -32,4 +32,4 @@ Coreutils is installed as a direct winget package; the profile intentionally avo
 
 ### Scoop (default buckets)
 
-`btop`, `eza`, `fastfetch`, `fzf`, `ghostscript`, `yazi`, `notepad3`, Delugia / FiraCode Nerd Fonts, lightshot.
+`btop`, `eza`, `fastfetch`, `fzf`, `ghostscript`, `yazi`, `notepad3`, `sumatrapdf`, Delugia / FiraCode Nerd Fonts, lightshot.

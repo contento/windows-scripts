@@ -54,7 +54,7 @@ $scoopPackages = @{
         "fzf",
         "ghostscript",
         "yazi");
-    "extras"     = @("notepad3");
+    "extras"     = @("notepad3", "sumatrapdf");
     "nerd-fonts" = @("Delugia-Nerd-Font-Complete", "Firacode", "FiraCode-NF");
     "versions"   = @("lightshot");
 }
@@ -73,6 +73,7 @@ $scoopOnlyPackages = @{
     );
     "extras"     = @(
         "notepad3",
+        "sumatrapdf",
         "windows-terminal",
         "vscode"
     );
