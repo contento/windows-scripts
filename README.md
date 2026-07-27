@@ -19,6 +19,7 @@ A collection of portable PowerShell scripts for Windows setup and daily use — 
 | [backup/](backup/) | Back up files and folders to OneDrive with automatic archiving |
 | [compress-this/](compress-this/) | Timestamped 7-Zip archive of the current folder; `-Dev` excludes build artifacts and caches |
 | [system/](system/) | One-time system setup: OpenSSH and user-folder symbolic links |
+| [terminal/](terminal/) | Version-controlled Windows Terminal settings.json, symlinked into place |
 
 ## Quick start
 
@@ -26,3 +27,4 @@ A collection of portable PowerShell scripts for Windows setup and daily use — 
 2. **Set up the profile** — see [profile/README.md](profile/README.md) or run `profile\Setup-Profile.ps1` (Windows) / `profile/setup-profile.sh` (macOS/Linux).
 3. **Configure system** _(optional, admin required)_ — see [system/README.md](system/README.md).
 4. **Set up backups** _(optional)_ — see [backup/README.md](backup/README.md).
+5. **Link Windows Terminal settings** _(optional, admin required)_ — see [terminal/README.md](terminal/README.md) or run `terminal\Setup-Terminal.ps1`.
