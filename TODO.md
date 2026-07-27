@@ -16,3 +16,4 @@ Working task list for `windows-scripts`.
 - [x] Confirmed Starship prompt initialization works as expected.
 - [x] Normalized assistant guidance into `AGENTS.md`, with `CLAUDE.md` and `.github/copilot-instructions.md` reduced to pointers.
 - [x] Removed `CLAUDE.md`; Claude Code now discovers `AGENTS.md` natively.
+- [x] Consolidated all per-folder READMEs into a single root `README.md`.

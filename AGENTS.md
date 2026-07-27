@@ -19,7 +19,7 @@ Key files and folders:
 - [compress-this/Compress-This.ps1](compress-this/Compress-This.ps1) — timestamped 7-Zip archive of the current folder; `-Dev` excludes build artifacts and caches.
 - [system/](system/) — `Setup-SSH.ps1` and `New-SymbolicLinks.ps1`.
 - [terminal/Setup-Terminal.ps1](terminal/Setup-Terminal.ps1) — symlinks the bundled Windows Terminal `settings.json` into place.
-- [README.md](README.md) — overview and links to each folder's README.
+- [README.md](README.md) — single consolidated overview and usage doc for every folder.
 
 ## Working rules
 
