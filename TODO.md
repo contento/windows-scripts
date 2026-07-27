@@ -2,7 +2,7 @@
 
 Working task list for `windows-scripts`.
 
-> **Sync note**: assistant guidance lives in `AGENTS.md`, with `CLAUDE.md` and `.github/copilot-instructions.md` as thin pointers to it. Keep this file current — check items off or remove them as they land, add new ones as they surface.
+> **Sync note**: assistant guidance lives in `AGENTS.md`. `.github/copilot-instructions.md` is a thin pointer to it, and Claude Code discovers `AGENTS.md` natively. Keep this file current — check items off or remove them as they land, add new ones as they surface.
 
 ## Open
 
@@ -15,3 +15,4 @@ Working task list for `windows-scripts`.
 - [x] Verified `profile/profile.ps1` works in Windows PowerShell 5.1.
 - [x] Confirmed Starship prompt initialization works as expected.
 - [x] Normalized assistant guidance into `AGENTS.md`, with `CLAUDE.md` and `.github/copilot-instructions.md` reduced to pointers.
+- [x] Removed `CLAUDE.md`; Claude Code now discovers `AGENTS.md` natively.

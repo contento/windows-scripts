@@ -2,7 +2,7 @@
 
 Guidance for AI coding agents (Claude Code, GitHub Copilot, etc.) working in this repository.
 
-> This is the single source of truth for agent guidance. [CLAUDE.md](CLAUDE.md) and [.github/copilot-instructions.md](.github/copilot-instructions.md) point here. Project tasks live in [TODO.md](TODO.md) — keep it current as work lands or new items surface.
+> This is the single source of truth for agent guidance. [.github/copilot-instructions.md](.github/copilot-instructions.md) points here; Claude Code discovers this file natively. Project tasks live in [TODO.md](TODO.md) — keep it current as work lands or new items surface.
 
 ## What this repo is
 
@@ -18,6 +18,7 @@ Key files and folders:
 - [backup/](backup/) — `Backup-Target.ps1` (engine) and `Backup-Me.ps1` (profile wrapper).
 - [compress-this/Compress-This.ps1](compress-this/Compress-This.ps1) — timestamped 7-Zip archive of the current folder; `-Dev` excludes build artifacts and caches.
 - [system/](system/) — `Setup-SSH.ps1` and `New-SymbolicLinks.ps1`.
+- [terminal/Setup-Terminal.ps1](terminal/Setup-Terminal.ps1) — symlinks the bundled Windows Terminal `settings.json` into place.
 - [README.md](README.md) — overview and links to each folder's README.
 
 ## Working rules
