@@ -51,6 +51,7 @@ $scoopPackages = @{
         "btop",
         "eza",
         "fastfetch",
+        "fd",
         "fzf",
         "ghostscript",
         "yazi");
@@ -64,6 +65,7 @@ $scoopOnlyPackages = @{
         "btop",
         "eza",
         "fastfetch",
+        "fd",
         "fzf",
         "ghostscript",
         "yazi",
