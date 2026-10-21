@@ -108,7 +108,9 @@ apps\New-Apps.ps1 -ScoopOnly
 
 Coreutils is installed as a direct winget package; the profile intentionally avoids aliasing its GNU-style commands to prevent PowerShell pipeline conflicts.
 
-**Scoop** (default buckets) — `btop`, `eza`, `fastfetch`, `fd`, `fzf`, `ghostscript`, `yazi`, `notepad3`, `sumatrapdf`, Delugia / FiraCode Nerd Fonts, lightshot.
+**Scoop** (default buckets) — `bat`, `btop`, `eza`, `fastfetch`, `fd`, `fzf`, `ghostscript`, `ripgrep`, `yazi`, `notepad3`, `sumatrapdf`, Delugia / FiraCode Nerd Fonts, lightshot.
+
+`-ScoopOnly` also installs the tools that otherwise come from winget: `7zip`, `git`, `lazygit`, `python`, `starship`, `zoxide`, `vscode`, `windows-terminal`.
 
 ## Backup
 

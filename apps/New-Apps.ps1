@@ -48,12 +48,14 @@ $wingetPackages = @{
 
 $scoopPackages = @{
     "default"    = @(
+        "bat",
         "btop",
         "eza",
         "fastfetch",
         "fd",
         "fzf",
         "ghostscript",
+        "ripgrep",
         "yazi");
     "extras"     = @("notepad3", "sumatrapdf");
     "nerd-fonts" = @("Delugia-Nerd-Font-Complete", "Firacode", "FiraCode-NF");
@@ -62,12 +64,17 @@ $scoopPackages = @{
 
 $scoopOnlyPackages = @{
     "main" = @(
+        "7zip",
+        "bat",
         "btop",
         "eza",
         "fastfetch",
         "fd",
         "fzf",
         "ghostscript",
+        "lazygit",
+        "ripgrep",
+        "starship",
         "yazi",
         "zoxide",
         "git",
